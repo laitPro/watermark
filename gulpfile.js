@@ -7,22 +7,22 @@ var gulp = require('gulp'),
 	htmlmin = require('gulp-htmlmin'),
 	jade = require('gulp-jade'),
 	//CSS
-	csso = require('gulp-csso'),
+	/*csso = require('gulp-csso'),*/
 	autoprefixer = require('gulp-autoprefixer'),
-	cssnano = require('gulp-cssnano'),
-	uncss = require('gulp-uncss'),
+	/*cssnano = require('gulp-cssnano'),*/
+	/*uncss = require('gulp-uncss'),*/
 	// sass = require('gulp-sass'),
 	compass = require('gulp-compass'),
-	plumber = require('gulp-plumber'),
+	plumber = require('gulp-plumber');
 	//IMG
-	spritesmith = require('gulp.spritesmith'),
+/*	spritesmith = require('gulp.spritesmith'),*/
 	//Build
-	gulpif = require('gulp-if'),
-	useref = require('gulp-useref'),
-	filter = require('gulp-filter'),
-	rimraf = require('gulp-rimraf'),
+	/*gulpif = require('gulp-if'),*/
+	/*useref = require('gulp-useref'),*/
+	/*filter = require('gulp-filter'),*/
+	/*rimraf = require('gulp-rimraf'),
 	size = require('gulp-size'),
-	concat = require('gulp-concat');
+	concat = require('gulp-concat')*/
 
 //=========================== 
 //Paths
