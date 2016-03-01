@@ -1,18 +1,18 @@
+@import "_common/_fonts";
 
+@import "_common/_variable";
 
-@import "_common/variable";
+@import "_common/_mixins";
 
-@import "_common/mixins";
-
-@import "_layout/mixins";
+@import "_layout/_mixins";
 
 /* ------------- sections---------- */
 
-@import "sections/adjastment";
+@import "_sections/_adjastment";
 
-@import "sections/main";
+@import "_sections/_main";
 
-@import "sections/footer";
+@import "_sections/_footer";
 
 
 
