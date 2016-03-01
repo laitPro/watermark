@@ -1,22 +1,9 @@
-doctype html
-html(lang="ru-Ua")
-	head
-		meta(charset="UTF-8")
-		//meta(name="viewport" content="width= ")
-		meta(name="description" content="Store by Nikula Misha")
-		meta(name="keywords" content="waterMark")
-		title Генератор водяный знаков
-		link(rel='shortcut icon', href='img/favicon.ico', type='image/x-icon')
-		link(rel="stylesheet", href="bower/normalize-css/normalize.css")
-		link(rel="stylesheet", href="css/main.css")
-		link(rel="stylesheet", href="")
-		script(type='text/javascript' src="../bower/modernizr/modernizr.js")
+extends layouts/default
 
-	body
-		.wrapper-all
-			include jade_components/content.jade
+block content
 
-		include jade_components/footer.jade
+    include components/content
+
 
 
 
