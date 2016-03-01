@@ -3,13 +3,20 @@
 }
 .maine__container{
 	width: 960px;
-	margin: 0 auto;
+	margin: 45px auto;
 	background-color: grey;
+	@extend %clearfix;
 }
 .maine__container-picture{
 	width: 700px;
+	float: left;
 }
 .maine__container-picture-name{
 	margin: 0;
 	padding: 0;
+}
+.maine__container-picture-display{
+	width: 650px;
+	height: 535px;
+	background-color: #ffffff;
 }

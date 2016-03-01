@@ -1,16 +1,16 @@
-.main:before, .main:after {
+.main:before, .maine__container:before, .main:after, .maine__container:after {
   content: "";
   display: table;
 }
-.main:after {
+.main:after, .maine__container:after {
   clear: both;
 }
 
-.main:before, .main:after {
+.main:before, .maine__container:before, .main:after, .maine__container:after {
   content: "";
   display: table;
 }
-.main:after {
+.main:after, .maine__container:after {
   clear: both;
 }
 
@@ -27,6 +27,10 @@ html, body {
 
 body {
   background-image: url(../img/background.jpg);
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .wrapper-all {
@@ -50,17 +54,34 @@ body {
 
 .maine__container {
   width: 960px;
-  margin: 0 auto;
+  margin: 45px auto;
   background-color: grey;
 }
 
 .maine__container-picture {
   width: 700px;
+  float: left;
 }
 
 .maine__container-picture-name {
   margin: 0;
   padding: 0;
+}
+
+.maine__container-picture-display {
+  width: 650px;
+  height: 535px;
+  background-color: #ffffff;
+}
+
+.maine__container-aside {
+  float: right;
+}
+
+.maine__container-aside-shell {
+  width: 260px;
+  min-height: 660px;
+  background-color: #f1f1f5;
 }
 
 .footer {
