@@ -1,0 +1,33 @@
+.position {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+
+    & * {
+        box-sizing: border-box;
+    }
+
+    &__grid {
+        display: flex;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+        width: 104px;
+        padding: 0;
+        border: 1px solid #9eb2c0;
+        margin: 0;
+
+        background-color: rgba(193, 207, 217, 0.46);
+        border-radius: 2px;
+        list-style: none;
+    }
+
+    &__grid-item {
+        width: 34px;
+        height: 34px;
+
+        text-indent: 100%;
+        white-space: nowrap;
+
+        overflow: hidden;
+    }
+}
