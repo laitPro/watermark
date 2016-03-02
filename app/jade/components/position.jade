@@ -1,0 +1,34 @@
+.position
+
+    -
+        var grid = {
+            'Верхний левый угол': 'left top', 'По центру сверху': 'center top', 'Верхний правый угол': 'right top',
+            'Слева по центру': 'left center', 'По центру': 'center center', 'Справа по центру': 'right center',
+            'Левый нижний угол': 'left bottom', 'По центру внизу': 'center bottom', 'Правй нижний угол': 'right bottom'
+        }
+
+    ul.position__grid
+
+        each value, key in grid
+
+            li.position__grid-item(data-position='#{value}')= key
+
+    .position__inputs-wrapper
+
+        .input-number.position__input
+
+            label.input-number__label X
+
+                input.input-number__field(name='x-position' type='number' min max value=0)
+
+            span.input-number__spinner.input-number__spinner_more Увеличить
+            span.input-number__spinner.input-number__spinner_less Уменьшить
+
+        .input-number.position__input
+
+            label.input-number__label Y
+
+                input.input-number__field(name='y-position' type='number' min max value=0)
+
+            span.input-number__spinner.input-number__spinner_more Увеличить
+            span.input-number__spinner.input-number__spinner_less Уменьшить
