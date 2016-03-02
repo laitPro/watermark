@@ -17,9 +17,8 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.2.1",
     "normalize-css": "normalize.css#^3.0.3",
-    "jQuery": "^2.2.1",
-    "ui": "^0.0.5"
+    "jquery": "^2.2.1",
+    "nouislider": "^8.3.0"
   }
 }
