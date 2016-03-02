@@ -11,11 +11,22 @@ $icon-home: x y offset_x offset_y width height total_width total_height image_pa
 At the bottom of this section, we provide information about the spritesheet itself
 $spritesheet: width height image $spritesheet-sprites;
 */
-$download: (0px, 0px, 0px, 0px, 39px, 27px, 63px, 51px, '../img/sprite.png', 'download', );
-$slider-opacity: (39px, 0px, -39px, 0px, 24px, 24px, 63px, 51px, '../img/sprite.png', 'sliderOpacity', );
-$slider-opacity-active: (0px, 27px, 0px, -27px, 24px, 24px, 63px, 51px, '../img/sprite.png', 'sliderOpacityActive', );
-$spritesheet-sprites: ($download, $slider-opacity, $slider-opacity-active, );
-$spritesheet: (63px, 51px, '../img/sprite.png', $spritesheet-sprites, );
+$cursor: (34px, 148px, -34px, -148px, 21px, 20px, 194px, 172px, '../img/sprite.png', 'cursor', );
+$download: (102px, 103px, -102px, -103px, 39px, 27px, 194px, 172px, '../img/sprite.png', 'download', );
+$en: (51px, 103px, -51px, -103px, 41px, 33px, 194px, 172px, '../img/sprite.png', 'en', );
+$fb-hover: (102px, 0px, -102px, 0px, 41px, 41px, 194px, 172px, '../img/sprite.png', 'fb-hover', );
+$fb: (0px, 52px, 0px, -52px, 41px, 41px, 194px, 172px, '../img/sprite.png', 'fb', );
+$like-hover: (51px, 52px, -51px, -52px, 41px, 41px, 194px, 172px, '../img/sprite.png', 'like-hover', );
+$like: (102px, 52px, -102px, -52px, 41px, 41px, 194px, 172px, '../img/sprite.png', 'like', );
+$ru: (0px, 103px, 0px, -103px, 41px, 35px, 194px, 172px, '../img/sprite.png', 'ru', );
+$slider-opacity: (0px, 148px, 0px, -148px, 24px, 24px, 194px, 172px, '../img/sprite.png', 'sliderOpacity', );
+$slider-opacity-active: (151px, 103px, -151px, -103px, 24px, 24px, 194px, 172px, '../img/sprite.png', 'sliderOpacityActive', );
+$twt-hover: (153px, 51px, -153px, -51px, 41px, 41px, 194px, 172px, '../img/sprite.png', 'twt-hover', );
+$twt: (153px, 0px, -153px, 0px, 41px, 41px, 194px, 172px, '../img/sprite.png', 'twt', );
+$vk-hover: (51px, 0px, -51px, 0px, 41px, 42px, 194px, 172px, '../img/sprite.png', 'vk-hover', );
+$vk: (0px, 0px, 0px, 0px, 41px, 42px, 194px, 172px, '../img/sprite.png', 'vk', );
+$spritesheet-sprites: ($cursor, $download, $en, $fb-hover, $fb, $like-hover, $like, $ru, $slider-opacity, $slider-opacity-active, $twt-hover, $twt, $vk-hover, $vk, );
+$spritesheet: (194px, 172px, '../img/sprite.png', $spritesheet-sprites, );
 
 /*
 The provided mixins are intended to be used with the array-like variables

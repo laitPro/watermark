@@ -59,6 +59,7 @@ gulp.task('sprite', function () {
         imgPath: '../img/sprite.png',
         cssName: '_sprite.scss',
         cssFormat: 'scss',
+        padding: 10,
         cssTemplate: 'handlebarsInheritance.scss.handlebars'
     }));
 

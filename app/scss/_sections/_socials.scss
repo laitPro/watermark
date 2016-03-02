@@ -1,0 +1,101 @@
+.socials {
+    position: absolute;
+    top: 60px;
+}
+
+.lang {
+    width: 42px;
+    margin-bottom: 18px;
+}
+
+.lang__item {
+    border-top: 1px solid #a5a7ac;
+    &:first-child {
+        border-top: 0 none;
+    }
+}
+
+.lang__link {
+    @extend .social__link;
+}
+
+.lang__link_ru {
+    display: block;
+    @include sprite($ru);
+}
+
+.lang__link_en {
+    display: block;
+    @include sprite($en);
+}
+
+.socials__wrapper {
+    width: 84px;
+    position: relative;
+}
+
+.social__list {
+    left: -41px;
+    width: 84px;
+    position: relative;
+    transition: left 1s ease;
+
+    &:hover {
+        left: 0;
+    }
+}
+
+.social__item {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.social__item_like {
+    position: absolute;
+    top: 0;
+    left: 41px;
+    display: block;
+}
+
+.social__link {
+    text-decoration: none;
+    color: transparent;
+}
+
+.social__link_fb {
+    display: block;
+    @include sprite($fb);
+
+    &:hover {
+        @include sprite($fb-hover);
+    }
+
+}
+
+.social__link_like {
+    display: block;
+    @include sprite($like);
+
+    &:hover {
+        @include sprite($like-hover);
+    }
+}
+
+.social__link_twt {
+    display: block;
+    @include sprite($twt);
+    
+    &:hover {
+        @include sprite($twt-hover);
+    }
+}
+
+.social__link_vk {
+    display: block;
+    @include sprite($vk);
+
+    &:hover {
+        @include sprite($vk-hover);
+    }
+}
