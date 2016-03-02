@@ -1,8 +1,15 @@
-.maine__container-aside{
+.maine__container-aside {
 	float: right;
 }
-.maine__container-aside-shell{
+
+.maine__container-aside-shell {
 	width: 260px;
-	min-height: 660px;
+	min-height: 670px;
 	background-color: #f1f1f5;
+}
+
+.maine__container-aside-shell-title {
+    padding-top: 25px;
+    padding-left: 65px;
+    color: #545b65;
 }
