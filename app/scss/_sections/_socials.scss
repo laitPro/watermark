@@ -3,6 +3,7 @@
     top: 60px;
 }
 
+// блок с языками
 .lang {
     width: 42px;
     margin-bottom: 18px;
@@ -29,38 +30,30 @@
     @include sprite($en);
 }
 
+//блок с социальными иконками
 .socials__wrapper {
-    width: 84px;
     position: relative;
-}
-
-.social__list {
-    left: -41px;
-    width: 84px;
-    position: relative;
-    transition: left 1s ease;
-
-    &:hover {
-        left: 0;
-    }
-}
-
-.social__item {
-    display: block;
-    position: relative;
-    overflow: hidden;
 }
 
 .social__item_like {
+    position: relative;
+    transition: margin-left .5s ease;
+
+    &:hover {
+        margin-left: 41px;
+    }
+}
+
+.social__list-inner {
     position: absolute;
+    right: 100%;
     top: 0;
-    left: 41px;
-    display: block;
 }
 
 .social__link {
     text-decoration: none;
     color: transparent;
+    display: block;
 }
 
 .social__link_fb {
