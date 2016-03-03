@@ -130,6 +130,7 @@ gulp.task('modernizr', function() {
 gulp.task('wiredep', function() {
 
     return gulp.src(paths.jade + '**/*.jade')
+        .pipe(plumber())
         .pipe(wiredep({
             ignorePath: '../../'
         }))
