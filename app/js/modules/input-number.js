@@ -16,8 +16,8 @@ var _setupWidget = function() {
 
             var $target = $(e.target),
                 eventType = e.type,
-                maxVal = $this.data('max'),
-                minVal = $this.data('min');
+                maxVal = $field.data('max'),
+                minVal = $field.data('min');
 
             var _changeVal = function() {
 
