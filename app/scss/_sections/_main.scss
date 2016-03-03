@@ -5,7 +5,7 @@
 .main__container{
 	width: 960px;
 	margin: 60px auto 0;
-	background-color: grey;
+	background-color: rgba(45, 54, 65, .67);
 	@extend %clearfix;
 }
 
