@@ -19,6 +19,20 @@
   "dependencies": {
     "normalize-css": "normalize.css#^3.0.3",
     "jquery": "^2.2.1",
-    "nouislider": "^8.3.0"
+    "nouislider": "^8.3.0",
+    "blueimp-file-upload": "https://github.com/blueimp/jQuery-File-Upload.git#~9.12.1",
+    "jquery-ui": "^1.11.4"
+  },
+  "overrides": {
+    "jquery-ui": {
+      "main": [
+        "ui/widget.js"
+      ]
+    },
+    "blueimp-file-upload": {
+      "dependencies": {
+        "jquery-ui": "^1.11.4"
+      }
+    }
   }
 }
