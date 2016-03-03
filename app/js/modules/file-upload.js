@@ -30,17 +30,16 @@ var _setupUpload = function() {
 		console.log(isImgs);
 	}
 
-	// var _displayImage = function(img,id){
-	// 	console.log(img,id);
+	var _displayImage = function(img,id){
+		console.log(img,id);
+ 		console.log('oke');
 
-
-	// 	 $('#big_img').fileupload({
-	//         dataType: 'json',
-	//         done: function (e, data) {
-	//             console.log('oke');
- //       		}
- //    	});
-	// }
+		 $('#big_img').fileupload({
+	        done: function (e, data) {
+	            console.log('oke');
+       		}
+    	});
+	}
 
 
 	
