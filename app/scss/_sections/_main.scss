@@ -1,10 +1,11 @@
 .main{
 	width: 100%;
+    margin: 60px 0;
 }
 
 .main__container{
 	width: 960px;
-	margin: 60px auto 0;
+	margin: 0px auto 0;
 	background-color: grey;
 	@extend %clearfix;
 }
