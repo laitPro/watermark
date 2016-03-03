@@ -2,37 +2,37 @@
 	width: 100%;
 }
 
-.maine__container{
+.main__container{
 	width: 960px;
 	margin: 60px auto;
 	background-color: grey;
 	@extend %clearfix;
 }
 
-.maine__container-picture {
+.main__container-picture {
 	width: 700px;
 	float: left;
 }
 
-.maine__container-picture-name {
+.main__container-picture-name {
 	margin: 0;
 	padding: 0;
 }
 
-.maine__container-picture-display {
+.main__container-picture-display {
 	width: 650px;
 	height: 535px;
 	background-color: #ffffff;
 	margin-left: 25px;
 }
 
-.maine__container-picture-title {
+.main__container-picture-title {
     margin-top: 8px;
     margin-left: 22px;
     margin-bottom: 20px;
 }
 
-.maine__container-picture-title-name {
+.main__container-picture-title-name {
 	color: #ffffff;
 	font-family: Segoe UI Light;
     font-weight: normal;
