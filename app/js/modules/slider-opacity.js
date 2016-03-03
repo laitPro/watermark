@@ -5,11 +5,12 @@ var sliderInit = function () {
     var rangeSlider = document.getElementById('slider-range');
 
     noUiSlider.create(rangeSlider, {
-        start: [ 4000 ],
+        start: [ 60 ],
         range: {
-            'min': [  2000 ],
-            'max': [ 10000 ]
-        }
+            'min': [  0 ],
+            'max': [ 100 ]
+        },
+        connect: 'lower'
     });
 
 }
