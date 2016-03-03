@@ -10,7 +10,7 @@ var _setupWidget = function() {
             $inputX = $this.find('.position__input-x'),
             $inputContainerX = $inputX.closest('.position__input-container'),
             $inputY = $this.find('.position__input-y'),
-            $inputContainerY = $inputX.closest('.position__input-container');
+            $inputContainerY = $inputY.closest('.position__input-container');
 
         $this.on('click', function(e) {
 
