@@ -16,8 +16,8 @@ var _setupWidget = function() {
 
             var $target = $(e.target),
                 eventType = e.type,
-                maxVal = $field.data('max'),
-                minVal = $field.data('min');
+                maxVal = $field.attr('data-max'),
+                minVal = $field.attr('data-min');
 
             var _changeVal = function() {
 
@@ -35,6 +35,8 @@ var _setupWidget = function() {
 
                         $field.val(--fieldVal);
                     }
+
+                    $field.trigger('change');
 
                 }
 
@@ -67,7 +69,7 @@ var _setupWidget = function() {
                 });
 
             // если тип события change
-            case 'change':
+            case ('change'):
 
                 // проверяем произошло ли событие в инпуте
                 var $fieldChanged = $target.closest('.input-number__field');

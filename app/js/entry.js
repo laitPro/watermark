@@ -13,13 +13,14 @@ $(function() {
     imgupload.init();
 
     var $display = $('.main__container-picture-display'),
-        $posInputX = $('.position__input-x'),
-        $posInputY = $('.position__input-y');
+        $posInputX = $('.position__input_x'),
+        $posInputY = $('.position__input_y');
 
     $('.big-img').on('change', function() {
 
         var $this = $(this),
-            $mainImg = $display.find('.main-img');
+            $mainImg = $display.find('.main-img'),
+            $watermark = $display.find('.watermark')
 
         if (!$mainImg.length) {
             $mainImg = $('<img class="main-img" src="">');
@@ -28,12 +29,26 @@ $(function() {
 
         $mainImg.attr('src', $this.val());
 
+        $mainImg.get(0).onload = function() {
+
+            var newMaxX = $watermark.length ? $mainImg.width() - $watermark.width() : $mainImg.width(),
+                newMaxY = $watermark.length ? $mainImg.height() - $watermark.height() : $mainImg.height();
+
+            $posInputX
+                .attr('data-max', newMaxX)
+                .trigger('change');
+            $posInputY
+                .attr('data-max', newMaxY)
+                .trigger('change');
+        };
+
     });
 
     $('.small-img').on('change', function() {
 
         var $this = $(this),
-            $watermark = $display.find('.watermark');
+            $watermark = $display.find('.watermark'),
+            $mainImg = $display.find('.main-img');
 
         if (!$watermark.length) {
             $watermark = $('<img class="$watermark" src="">');
@@ -47,6 +62,18 @@ $(function() {
         }
 
         $watermark.attr('src', $this.val());
+
+        $watermark.get(0).onload = function() {
+            var newMaxX = $mainImg.width() - $watermark.width(),
+                newMaxY = $mainImg.height() - $watermark.height();
+
+            $posInputX
+                .attr('data-max', newMaxX)
+                .trigger('change');
+            $posInputY
+                .attr('data-max', newMaxY)
+                .trigger('change');
+        };
 
     });
 
