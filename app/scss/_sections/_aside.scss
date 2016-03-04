@@ -1,30 +1,36 @@
-.maine__container-aside {
+.main__container-aside {
 	float: right;
+    background-color: #f1f1f5;
 }
 
-.maine__container-aside-shell {
+.main__container-aside-shell {
 	width: 260px;
 	min-height: 670px;
-	background-color: #f1f1f5;
 }
 
-.maine__container-aside-shell-title {
+.main__container-aside-shell-title {
     padding-top: 22px;
     padding-left: 65px;
     color: #545b65;
 }
 
-.maine__container-aside-shell-title-name{
+.main__container-aside-shell-title-name{
     font-family: $globalFont;
     font-weight: normal;
     font-size: 28px;
     margin-top: 0px;
-    margin-bottom: 30px;
+    margin-bottom: 33px;
+}
+
+.asideBloks-indents{
+    margin: 0 auto;
+    width: 220px;
+    margin-bottom: 27px;
 }
 
 /* fence */
-.maine__container-aside-shell-form-container-fence{
-    padding-bottom: 25px;
+.main__container-aside-shell-form-container-fence{
+    padding-bottom: 22px;
     position: relative;
     &:after {
         position: absolute;
@@ -38,15 +44,15 @@
 }
 
 /* buttons */
-.maine__container-aside-shell-form-container-buttom{
+.main__container-aside-shell-form-container-buttom{
     @extend %clearfix ;
     width: 240px;
     margin: 0px auto;
-    padding-top: 32px;
-    padding-bottom: 32px;
+    padding-top: 39px;
+    padding-bottom: 24px;
 }
 
-.maine__container-aside-shell-form-container-buttom-reset{
+.main__container-aside-shell-form-container-buttom-reset{
     float: left;
     padding: 10px 19px 7px 25px;
     font-size: 19px;
@@ -57,8 +63,8 @@
     outline: none;
 }
 
-.maine__container-aside-shell-form-container-buttom-Upload{
-    @extend .maine__container-aside-shell-form-container-buttom-reset;
+.main__container-aside-shell-form-container-buttom-Upload{
+    @extend .main__container-aside-shell-form-container-buttom-reset;
     float: right;
     background-color: #f97e76;
     padding: 10px 13px 10px 15px;
