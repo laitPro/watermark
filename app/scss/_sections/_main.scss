@@ -8,6 +8,7 @@
 	margin: 60px auto 0;
 	background-color: rgba(45, 54, 65, .67);
 	@extend %clearfix;
+    display: flex;
 }
 
 .main__container-picture {
@@ -25,6 +26,7 @@
 	height: 535px;
 	background-color: #ffffff;
 	margin-left: 25px;
+    margin-bottom: 25px;
 }
 
 .main__container-picture-title {
