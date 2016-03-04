@@ -1,4 +1,4 @@
-var $input_imgs = $('.maine__upload-block input');
+var $input_imgs = $('.main__upload-block input');
 var isImgs = {};
 
 var _setupUpload = function() {
