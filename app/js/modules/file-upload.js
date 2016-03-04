@@ -21,7 +21,7 @@ var _setupUpload = function() {
         var file_id = img.attr('id');
         var input_title = img.prevAll('.file__name');
 
-        if ((file_format === 'png') || (file_format === 'jpg')) {
+        if ((file_format === 'png') || (file_format === 'jpg' || file_format === 'JPG')) {
             input_title.text(file_name);
             isImgs[file_id] = 'true';
             _displayImage(file_id);
