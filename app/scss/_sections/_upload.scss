@@ -72,11 +72,24 @@
 	cursor: pointer;
 }
 
-.upload-block__label input[type=file] {
+.upload-block__label .file__input {
 	position: absolute;
 	top: 0;
 	opacity: 0;
-	width: 0;
-	height: 0;
 }
 /*Блок с загрузкой файлов КОНЕЦ!!!!!*/
+
+// Размер картинок
+.wrap_img{
+	position:relative;
+	display: inline-block;
+}
+.big_img,.water_mark{
+	max-width:650px;
+	max-height:430px;
+}
+.water_mark{
+	position:absolute;
+	top:0;
+	left:0;
+}
