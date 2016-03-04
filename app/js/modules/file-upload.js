@@ -3,10 +3,10 @@ var isImgs = {};
 
 var _setupUpload = function() {
 
-	// Изначально все инпуты не верные
-	$input_imgs.each(function(index, el) {
-		isImgs[$(el).attr('id')] = 'false';
-	});
+    // Изначально все инпуты не верные
+    $input_imgs.each(function(index, el) {
+        isImgs[$(el).attr('id')] = 'false';
+    });
 
 
     $input_imgs.on('change',function(e) {
@@ -35,34 +35,34 @@ var _setupUpload = function() {
 
     var _displayImage = function (id){
 
-    	var file = document.querySelector('#'+id).files[0];
-    	var reader = new FileReader();
+        var file = document.querySelector('#'+id).files[0];
+        var reader = new FileReader();
 
-    	if (!$('.wrap_img').length) {
-    		$('.main__container-picture-display').append('<div class="wrap_img"></div>');
-    	}
+        if (!$('.wrap_img').length) {
+            $('.main__container-picture-display').append('<div class="wrap_img"></div>');
+        }
 
-    	reader.onload = function () {
-			   
-			if ($('img.'+id).length) {
-				$('img.'+id).attr('src',reader.result)
-			}
-			else {
-				$('.wrap_img').append("<img src='" + reader.result + "' class='"+id +"'"  +"/>");
-			}
-		}
+        reader.onload = function () {
+               
+            if ($('img.'+id).length) {
+                $('img.'+id).attr('src',reader.result)
+            }
+            else {
+                $('.wrap_img').append("<img src='" + reader.result + "' class='"+id +"'"  +"/>");
+            }
+        }
 
-		if (file) {
-		    reader.readAsDataURL(file);
-		} 	
+        if (file) {
+            reader.readAsDataURL(file);
+        }   
     }  
 
     // Функция валидации инпутов
     var _validate = function(){
-    	for (prop in isImgs){
-    		if (isImgs[prop] === 'false') return false;
-    	}
-		return true;
+        for (prop in isImgs){
+            if (isImgs[prop] === 'false') return false;
+        }
+        return true;
     }
 }
 
@@ -74,7 +74,7 @@ module.exports = {
         }
     },
     isvalidinput : function(){
-    	_validate();
+        _validate();
     }
     
 }
