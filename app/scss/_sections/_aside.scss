@@ -1,0 +1,71 @@
+.main__container-aside {
+	float: right;
+    background-color: #f1f1f5;
+}
+
+.main__container-aside-shell {
+	width: 260px;
+	min-height: 670px;
+}
+
+.main__container-aside-shell-title {
+    padding-top: 22px;
+    padding-left: 65px;
+    color: #545b65;
+}
+
+.main__container-aside-shell-title-name{
+    font-family: $globalFont;
+    font-weight: normal;
+    font-size: 28px;
+    margin-top: 0px;
+    margin-bottom: 33px;
+}
+
+.asideBloks-indents{
+    margin: 0 auto;
+    width: 220px;
+    margin-bottom: 27px;
+}
+
+/* fence */
+.main__container-aside-shell-form-container-fence{
+    padding-bottom: 22px;
+    position: relative;
+    &:after {
+        position: absolute;
+        content: '';
+        width: 257px;
+        height: 10px;
+        top: 1px;
+        background-image: url(../img/fence.png);
+    }
+
+}
+
+/* buttons */
+.main__container-aside-shell-form-container-buttom{
+    @extend %clearfix ;
+    width: 240px;
+    margin: 0px auto;
+    padding-top: 39px;
+    padding-bottom: 24px;
+}
+
+.main__container-aside-shell-form-container-buttom-reset{
+    float: left;
+    padding: 10px 19px 7px 25px;
+    font-size: 19px;
+    color: #ffffff;
+    background-color: #c1cfd9;
+    border: 1px solid #c1cfd9;
+    border-radius: 3px;
+    outline: none;
+}
+
+.main__container-aside-shell-form-container-buttom-Upload{
+    @extend .main__container-aside-shell-form-container-buttom-reset;
+    float: right;
+    background-color: #f97e76;
+    padding: 10px 13px 10px 15px;
+}
