@@ -13,6 +13,12 @@ var sliderInit = function () {
         connect: 'lower'
     });
 
+    var rangeSliderValueElement = document.getElementById('slider-range-value');
+
+    rangeSlider.noUiSlider.on('update', function( values, handle ) {
+        rangeSliderValueElement.value = parseInt(values[handle]);
+    });
+
 }
 
 module.exports = {
