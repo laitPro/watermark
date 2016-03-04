@@ -69,7 +69,10 @@
         text-align: right;
     }
 
-    &__input-x {
-        margin-bottom: 12px;
+    &__input-container {
+
+        &:not(:last-child) {
+            margin-bottom: 12px;
+        }
     }
 }

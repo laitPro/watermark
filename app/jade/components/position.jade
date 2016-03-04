@@ -4,9 +4,9 @@
 
     -
         var grid = [
-            ['left top', 'center top', 'right top'],
-            ['left center', 'center center', 'right center'],
-            ['left bottom', 'center bottom', 'right bottom']
+            [{x: 0, y: 0}, {x: 50, y: 0}, {x: 100, y: 0}],
+            [{x: 0, y: 50}, {x: 50, y: 50}, {x: 100, y: 50}],
+            [{x: 0, y: 100}, {x: 50, y: 100}, {x: 100, y: 100}]
         ];
 
     .position__grid-wrapper
@@ -19,24 +19,24 @@
 
                     each cell in row
 
-                        td.position__grid-cell(data-position='#{cell}')
+                        td.position__grid-cell(data-pos-x='#{cell.x}' data-pos-y='#{cell.y}')
 
     .position__inputs-wrapper
 
-        .input-number.position__input-x(data-min=0 data-max=100)
+        .input-number.position__input-container(data-min=0 data-max=200)
 
             label.input-number__label X
 
-                input.input-number__field(name='x-position' type='number' value=10)
+                input.input-number__field.position__input-x(name='x-position' type='number' value=10)
 
             span.input-number__spin.input-number__spin_more Увеличить
             span.input-number__spin.input-number__spin_less Уменьшить
 
-        .input-number.position__input-y(data-min=0 data-max=100)
+        .input-number.position__input-container(data-min=0 data-max=50)
 
             label.input-number__label Y
 
-                input.input-number__field(name='y-position' type='number' value=0)
+                input.input-number__field.position__input-y(name='y-position' type='number' value=0)
 
             span.input-number__spin.input-number__spin_more Увеличить
             span.input-number__spin.input-number__spin_less Уменьшить
