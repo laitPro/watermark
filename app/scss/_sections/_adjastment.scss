@@ -23,6 +23,7 @@ li{
 
 .wrapper-all {
     min-height: 100%;
+    position: relative;
 }
 .wrapper {
     position: relative;
@@ -34,10 +35,11 @@ li{
 }
 
 .empty {
-    height: 72px;
+    height: 70px;
 }
 
 .footer {
     height: 35px;
     margin-top: -35px;
+    position: relative;
 }
