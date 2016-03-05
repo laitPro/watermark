@@ -11,10 +11,19 @@ var setValue = function($elem, val) {
 
 };
 
-var getValue = function(elem) {
+var getValue = function($elem) {
 
-    if (elem.is('.input-number__field')) {
-        return parseInt(elem.val());
+    if ($elem.is('.input-number__field')) {
+        return parseInt($elem.val());
+    }
+
+};
+
+var setLimit = function($elem, limitEdge, val) {
+
+    if ($elem.is('.input-number__field')) {
+        $elem.attr('data-' + limitEdge, val);
+        $elem.trigger('change');
     }
 
 };
@@ -142,6 +151,8 @@ module.exports = {
 
     setValue: setValue,
 
-    getValue: getValue
+    getValue: getValue,
+
+    setLimit: setLimit
 
 }

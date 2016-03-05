@@ -1,5 +1,44 @@
 var $position = $('.position'),
-    $display = $('.main__container-picture-display');
+    $display = $('.main__container-picture-display'),
+    $inputModule = require('./input-number');
+
+var setPosition = function($block, positionX, positionY) {
+
+    var $inputX = $block.find('.position__input_x'),
+        $inputY = $block.find('.position__input_y'),
+        xLimits = {},
+        yLimits = {},
+        newPos = {};
+
+    xLimits.max = parseInt($inputX.attr('data-max'));
+    xLimits.min = parseInt($inputX.attr('data-min'));
+
+    yLimits.max = parseInt($inputY.attr('data-max'));
+    yLimits.min = parseInt($inputY.attr('data-min'));
+
+    newPos.x = Math.round((xLimits.max - xLimits.min) * positionX / 100);
+    newPos.y = Math.round((yLimits.max - yLimits.min) * positionY / 100);
+
+    $inputModule.setValue($inputX, newPos.x);
+    $inputModule.setValue($inputY, newPos.y);
+
+};
+
+var getGridCoord = function($block) {
+
+    if ($block.is('.position')) {
+        var $gridCellActive = $block.find('.position__grid-cell_active'),
+            coord = {};
+
+        coord.x = parseInt($gridCellActive.data('pos-x'));
+        coord.y = parseInt($gridCellActive.data('pos-y'));
+
+        return coord;
+    }
+
+};
+
+var _inputChangeCallback = function() {};
 
 var _setupWidget = function() {
 
@@ -7,9 +46,7 @@ var _setupWidget = function() {
 
         var $this = $(this),
             $grid = $this.find('.position__grid'),
-            $gridItems = $grid.find('.position__grid-cell'),
-            $inputX = $this.find('.position__input_x'),
-            $inputY = $this.find('.position__input_y');
+            $gridItems = $grid.find('.position__grid-cell');
 
         $this.on('click', function(e) {
 
@@ -24,28 +61,12 @@ var _setupWidget = function() {
                     return;
                 }
 
-                var xLimits = {},
-                    yLimits = {},
-                    newPos = {};
-
-                xLimits.max = parseInt($inputX.attr('data-max'));
-                xLimits.min = parseInt($inputX.attr('data-min'));
-
-                yLimits.max = parseInt($inputY.attr('data-max'));
-                yLimits.min = parseInt($inputY.attr('data-min'));
-
-                newPos.x = Math.round((xLimits.max - xLimits.min) * parseInt($gridItemClicked.data('pos-x')) / 100);
-                newPos.y = Math.round((yLimits.max - yLimits.min) * parseInt($gridItemClicked.data('pos-y')) / 100);
-
-                $inputX
-                    .val(newPos.x)
-                    .trigger('change');
-                $inputY
-                    .val(newPos.y)
-                    .trigger('change');
-
                 $gridItems.removeClass('position__grid-cell_active');
                 $gridItemClicked.addClass('position__grid-cell_active');
+
+                var coord = getGridCoord($this);
+
+                setPosition($this, coord.x, coord.y);
 
             }
 
@@ -59,17 +80,7 @@ var _setupWidget = function() {
 
             if ($inputChanged.length) {
 
-                var val = parseInt($inputChanged.val())
-
-                if ($inputChanged.is($inputX)) {
-                    $watermark.css('left', val + 'px');
-                    return;
-
-                } else if ($inputChanged.is($inputY)) {
-
-                    $watermark.css('top', val + 'px');
-                    return;
-                }
+                _inputChangeCallback($this, $inputChanged);
 
             }
 
@@ -82,11 +93,17 @@ var _setupWidget = function() {
 module.exports = {
 
     init: function() {
-
         if ($position.length) {
             _setupWidget();
         }
+    },
 
+    setPosition: setPosition,
+
+    getGridCoord: getGridCoord,
+
+    setInputChangeCallback: function(callback) {
+        _inputChangeCallback = callback;
     }
 
 };
