@@ -57,12 +57,10 @@ var _setupWidget = function() {
 
                 e.preventDefault();
 
-                if ($gridItemClicked.hasClass('position__grid-cell_active')) {
-                    return;
+                if (!$gridItemClicked.hasClass('position__grid-cell_active')) {
+                    $gridItems.removeClass('position__grid-cell_active');
+                    $gridItemClicked.addClass('position__grid-cell_active');
                 }
-
-                $gridItems.removeClass('position__grid-cell_active');
-                $gridItemClicked.addClass('position__grid-cell_active');
 
                 var coord = getGridCoord($this);
 
