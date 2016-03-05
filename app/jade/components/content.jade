@@ -5,14 +5,14 @@
             option(value='default' selected disabled) выберите изображение
             option(value='http://lorempixel.com/400/400') 400x400
             option(value='http://lorempixel.com/500/300') 500x300
-            option(value='http://lorempixel.com/500/500') 500x500
-            option(value='http://lorempixel.com/400/500') 400x500
+            option(value='http://lorempixel.com/500/1000') 500x1000
+            option(value='http://lorempixel.com/1000/500') 1000x500
         |<br>
 
         label Маленькая картинка
         select.small-img
             option(value='default' selected disabled) выберите изображение
-            option(value='http://lorempixel.com/50/50') 50x50
+            option(value='http://lorempixel.com/200/200') 200x200
             option(value='http://lorempixel.com/100/100') 100x100
             option(value='http://lorempixel.com/50/100') 50x100
             option(value='http://lorempixel.com/100/50') 100x50
@@ -22,9 +22,10 @@
                 .main__container-picture-title
                     h1.main__container-picture-title-name
                         |Генератор водяных знаков
-                .main__container-picture-display
-                    img.main-img(src='http://lorempixel.com/500/500')
-                    img.watermark(src='http://lorempixel.com/100/100' style='position: absolute; top: 0; left: 0')
+                .main__container-picture-display.canvas
+                    .canvas__inner
+                        img.main-img(src='http://lorempixel.com/500/500')
+                        img.watermark(src='http://lorempixel.com/100/100' style='position: absolute; top: 0; left: 0')
 
             include aside
 

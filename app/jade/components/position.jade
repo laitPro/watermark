@@ -4,22 +4,21 @@
 
     -
         var grid = [
-            [{x: 0, y: 0}, {x: 50, y: 0}, {x: 100, y: 0}],
-            [{x: 0, y: 50}, {x: 50, y: 50}, {x: 100, y: 50}],
-            [{x: 0, y: 100}, {x: 50, y: 100}, {x: 100, y: 100}]
+            {x: 0, y: 0}, {x: 50, y: 0}, {x: 100, y: 0},
+            {x: 0, y: 50}, {x: 50, y: 50}, {x: 100, y: 50},
+            {x: 0, y: 100}, {x: 50, y: 100}, {x: 100, y: 100}
         ];
 
     .position__grid-wrapper
 
-        table.position__grid
+        .position__grid
 
-            each row in grid
+            each item in grid
 
-                tr.position__grid-row
+                a.position__grid-cell(data-pos-x='#{item.x}' data-pos-y='#{item.y}' href=jv0)
 
-                    each cell in row
-
-                        td.position__grid-cell(data-pos-x='#{cell.x}' data-pos-y='#{cell.y}')
+            span.position__cross-line.position__cross-line_vert
+            span.position__cross-line.position__cross-line_horiz
 
     .position__inputs-wrapper
 

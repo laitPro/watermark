@@ -18,40 +18,39 @@
     &__grid-wrapper {
         flex-shrink: 0;
         width: 104px;
-
-        border: 1px solid #9eb2c0;
-        border-radius: 2px;
-        overflow: hidden;
     }
 
     &__grid {
         width: 100%;
         padding: 0;
-        border: none;
         margin: 0;
+        border: 1px solid #9eb2c0;
+
+        font-size: 0;
 
         background-color: rgba(193, 207, 217, 0.46);
+        border-radius: 2px;
+        overflow: hidden;
         list-style: none;
     }
 
-    &__grid-row {
-        width: 100%;
-
-        &:not(:last-child) {
-            border-bottom: 1px solid #9eb2c0;
-        }
-    }
-
     &__grid-cell {
+        display: inline-block;
         width: 34px;
         height: 34px;
+        border-right: 1px solid #9eb2c0;
+        border-top: 1px solid #9eb2c0;
 
         cursor: pointer;
 
         transition: background-color .3s ease;
 
-        &:not(:last-child) {
-            border-right: 1px solid #9eb2c0;
+        &:nth-of-type(3n) {
+            border-right: none;
+        }
+
+        &:nth-of-type(-n + 3) {
+            border-top: none;
         }
 
         &:not(.position__grid-cell_active) {

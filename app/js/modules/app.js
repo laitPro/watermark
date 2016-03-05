@@ -1,9 +1,10 @@
 var positionModule = require('./position'),
     inputNumberModule = require('./input-number');
 
-var $display = $('.main__container-picture-display'),
-    $mainImg = $display.find('.main-img'),
-    $watermark = $display.find('.watermark'),
+var $canvas = $('.canvas'),
+    $imgWrapper = $('.canvas__inner'),
+    $mainImg = $canvas.find('.main-img'),
+    $watermark = $canvas.find('.watermark'),
     $posInputX = $('.position__input_x'),
     $posInputY = $('.position__input_y');
 
@@ -46,12 +47,12 @@ var _changeWatermarkPosition = function() {
 $('.big-img').on('change', function() {
 
     var $this = $(this),
-        $mainImg = $display.find('.main-img'),
-        $watermark = $display.find('.watermark')
+        $mainImg = $canvas.find('.main-img'),
+        $watermark = $canvas.find('.watermark')
 
     if (!$mainImg.length) {
         $mainImg = $('<img class="main-img" src="">');
-        $display.append($mainImg);
+        $imgWrapper.append($mainImg);
     }
 
     _loadImg($this, $mainImg);
@@ -61,8 +62,8 @@ $('.big-img').on('change', function() {
 $('.small-img').on('change', function() {
 
     var $this = $(this),
-        $watermark = $display.find('.watermark'),
-        $mainImg = $display.find('.main-img');
+        $watermark = $canvas.find('.watermark'),
+        $mainImg = $canvas.find('.main-img');
 
     if (!$watermark.length) {
         $watermark = $('<img class="$watermark" src="">');
@@ -72,7 +73,7 @@ $('.small-img').on('change', function() {
                 'top': 0,
                 'left': 0
             })
-            .appendTo($display);
+            .appendTo($imgWrapper);
     }
 
     _loadImg($this, $watermark);
