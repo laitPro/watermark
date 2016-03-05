@@ -1,3 +1,4 @@
+
 var $position = $('.position');
 
 var _setupWidget = function() {
