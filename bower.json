@@ -21,7 +21,8 @@
     "jquery": "^2.2.1",
     "nouislider": "^8.3.0",
     "blueimp-file-upload": "https://github.com/blueimp/jQuery-File-Upload.git#~9.12.1",
-    "jquery-ui": "^1.11.4"
+    "jquery-ui": "^1.11.4",
+    "draggabilly": "^2.1.0"
   },
   "overrides": {
     "jquery-ui": {
@@ -33,6 +34,11 @@
       "dependencies": {
         "jquery-ui": "^1.11.4"
       }
+    },
+    "draggabilly": {
+      "main": [
+        "dist/draggabilly.pkgd.js"
+      ]
     }
   }
 }

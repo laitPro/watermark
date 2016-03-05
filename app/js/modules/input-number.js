@@ -2,11 +2,16 @@ var $inputNumber = $('.input-number');
 
 var _isNumeric = require('../functions/is-numeric');
 
-var setValue = function($elem, val) {
+var setValue = function($elem, val, change) {
+
+    var triggerChange = change === false ? false : true;
 
     if ($elem.is('.input-number__field')) {
         $elem.val(val);
-        $elem.trigger('change');
+
+        if (triggerChange) {
+            $elem.trigger('change');
+        }
     }
 
 };

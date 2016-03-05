@@ -24,6 +24,24 @@ var _loadImg = function($select, $img) {
     };
 };
 
+var _dragWatermark = function() {
+
+    $watermark.draggabilly({
+        containment: true
+    });
+
+    $watermark.on('dragMove', function(event, pointer, moveVector) {
+
+        var $this = $(this),
+            position = $this.data('draggabilly').position;
+
+        inputNumberModule.setValue($posInputX, position.x, false);
+        inputNumberModule.setValue($posInputY, position.y, false);
+
+    });
+
+}
+
 var _changeWatermarkPosition = function() {
 
     positionModule.setInputChangeCallback(function($block, $input) {
@@ -83,5 +101,6 @@ $('.small-img').on('change', function() {
 module.exports = {
     init: function() {
         _changeWatermarkPosition();
+        _dragWatermark();
     }
 }
