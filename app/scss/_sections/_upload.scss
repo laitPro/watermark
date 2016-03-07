@@ -8,7 +8,7 @@
 }
 
 /* Блок с загрузкой файлов */
-.maine__upload-block {
+.main__upload-block {
     display: inline-block;
 }
 
@@ -77,17 +77,23 @@
 }
 /*Блок с загрузкой файлов КОНЕЦ!!!!!*/
 
-// Размер картинок
-.wrap_img{
-    position:relative;
+// Стили для картинок
+.canvas__inner{
     display: inline-block;
+    vertical-align:top;
+    position:relative;
+    max-width:651px;
+    max-height:535px;
+    font-size: 0;
+    line-height: 0
 }
 .big_img,.water_mark{
-    max-width:650px;
-    max-height:430px;
+    max-width:100%;
+    max-height:inherit;
 }
 .water_mark{
     position:absolute;
     top:0;
     left:0;
+    max-height:100%;
 }
