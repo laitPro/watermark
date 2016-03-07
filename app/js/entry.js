@@ -11,5 +11,4 @@ $(function() {
     inputNumberModule.init();
     sliderOpacitySlider.init();
     imgupload.init();
-
 });
