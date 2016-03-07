@@ -7,7 +7,7 @@ var sliderInit = function () {
     var rangeSlider = document.getElementById('slider-range');
 
     noUiSlider.create(rangeSlider, {
-        start: [ .1 ],
+        start: [ .6 ],
         range: {
             'min': [  0 ],
             'max': [ 1 ]
@@ -29,17 +29,19 @@ var sliderInit = function () {
 var $watermarkImg = $('.main__container-picture-display');
 
 
-var watermarkOpacity = function () {
+ function watermarkOpacity () {
+    if (document.getElementById('img_water_mark')){ 
+        var rangeSliderOpacity = document.getElementById('slider-range'),
+            img = document.getElementById('img_water_mark');
 
-    var rangeSliderOpacity = document.getElementById('slider-range'),
-        img = document.getElementById('img_water_mark');
+        rangeSliderOpacity.noUiSlider.on('update', _setOpacity);
 
-    rangeSliderOpacity.noUiSlider.on('update', _setOpacity);
-
-    function _setOpacity (values, handle) {
-        img.style.opacity = values[handle];
+        function _setOpacity (values, handle) {
+            img.style.opacity = values[handle];
+        }
+    } else {
+        setTimeout (watermarkOpacity, 300);
     }
-    
 };
 
 module.exports = {
