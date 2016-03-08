@@ -40,27 +40,42 @@ var _dragWatermark = function() {
 
     });
 
-}
+};
 
 var _changeWatermarkPosition = function() {
 
     positionModule.setInputChangeCallback(function($block, $input) {
 
         if ($block.is('#watermark-position')) {
-            var val = parseInt($input.val())
 
-            if ($input.is($posInputX)) {
-                $watermark.css('left', val + 'px');
+            var val = parseInt($input.val());
 
-            } else if ($input.is($posInputY)) {
+            if ($block.attr('data-mode') === 'single') {
 
-                $watermark.css('top', val + 'px');
+                if ($input.is($posInputX)) {
+                    $watermark.css('left', val + 'px');
+
+                } else if ($input.is($posInputY)) {
+
+                    $watermark.css('top', val + 'px');
+                }
+
+            } else if ($block.attr('data-mode') === 'tiling') {
+
+                if ($input.is($posInputX)) {
+                    $watermark.css('left', val + 'px');
+
+                } else if ($input.is($posInputY)) {
+
+                    $watermark.css('top', val + 'px');
+                }
+
             }
         }
 
     });
 
-}
+};
 
 $('.big-img').on('change', function() {
 

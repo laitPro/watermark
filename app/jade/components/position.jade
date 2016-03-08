@@ -1,6 +1,12 @@
-.position#watermark-position
+.position#watermark-position(data-mode='single')
 
-    .position__title Положение
+    header.position__header
+        .position__title Положение
+        ul.position__modes-list
+            li.position__mode(data-mode='tiling')
+                a.position__mode-inner.position__mode-inner_tiling(href=jv0) Режим замощения
+            li.position__mode.position__mode_active(data-mode='single')
+                a.position__mode-inner.position__mode-inner_single(href=jv0) Режим одиночного знака
 
     -
         var grid = [
