@@ -1,4 +1,4 @@
-/*<<<<<<< HEAD*/
+ 
 var $inputNumber = $('.input-number');
 
 var isNumeric = require('../functions/is-numeric');

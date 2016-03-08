@@ -49,7 +49,7 @@ var _setupWidget = function() {
 
         });
 
-    });
+    }); 
 
 };
 
