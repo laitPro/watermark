@@ -84,6 +84,8 @@
     }
 
     &__grid {
+        position: relative;
+
         width: 100%;
         padding: 0;
         margin: 0;
@@ -95,6 +97,17 @@
         border-radius: 2px;
         overflow: hidden;
         list-style: none;
+
+        &_tiling {
+
+            .position__grid-cell {
+                visibility: hidden;
+            }
+
+            .position__cross-line {
+                visibility: visible;
+            }
+        }
     }
 
     &__grid-cell {
@@ -124,6 +137,33 @@
 
         &_active {
             background-color: #f97e76;
+        }
+    }
+
+    &__cross-line {
+        position: absolute;
+
+        visibility: hidden;
+        background-color: #f97e76;
+
+        &_vert {
+            top: 0;
+            left: 50%;
+            bottom: 0;
+
+            width: 0;
+
+            transform: translteX(-50%);
+        }
+
+        &_horiz {
+            left: 0;
+            right: 0;
+            top: 50%;
+
+            height: 0;
+
+            transform: translteY(-50%);
         }
     }
 

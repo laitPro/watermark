@@ -46,12 +46,17 @@ var _setupWidget = function() {
 
         var $this = $(this),
             $grid = $this.find('.position__grid'),
-            $gridItems = $grid.find('.position__grid-cell');
+            $gridItems = $grid.find('.position__grid-cell'),
+            $inputX = $this.find('.position__input_x'),
+            $inputY = $this.find('.position__input_y'),
+            $crossLineX = $grid.find('.position__cross-line_vert'),
+            $crossLineY = $grid.find('.position__cross-line_horiz');
 
         $this.on('click', function(e) {
 
             var $target = $(e.target),
-                $gridItemClicked = $target.closest('.position__grid-cell');
+                $gridItemClicked = $target.closest('.position__grid-cell'),
+                $modeSwitchClicked = $target.closest('.position__mode');
 
             if ($gridItemClicked.length) {
 
@@ -68,6 +73,42 @@ var _setupWidget = function() {
 
             }
 
+            if ($modeSwitchClicked.length) {
+
+                e.preventDefault();
+
+                if ($modeSwitchClicked.hasClass('position__mode_active')) {
+                    return;
+                }
+
+                var newMode = $modeSwitchClicked.data('mode');
+
+                $modeSwitchClicked
+                    .addClass('position__mode_active')
+                    .siblings()
+                    .removeClass('position__mode_active');
+
+                $this.attr('data-mode', newMode);
+
+                $inputModule.setValue($inputX, 0);
+                $inputModule.setValue($inputY, 0);
+
+                switch (newMode) {
+
+                case ('tiling'):
+                    $grid.addClass('position__grid_tiling');
+                    break;
+
+                case ('single'):
+                    $grid.removeClass('position__grid_tiling');
+                    break;
+
+                }
+
+                $this.trigger('positionModeChange');
+
+            }
+
         });
 
         $this.on('change', function(e) {
@@ -78,7 +119,19 @@ var _setupWidget = function() {
 
             if ($inputChanged.length) {
 
-                _inputChangeCallback($this, $inputChanged);
+                if ($this.attr('data-mode') === 'tiling') {
+
+                    var inputVal = parseInt($inputChanged.val()),
+                        maxVal = parseInt($inputChanged.attr('data-max')),
+                        newSize = inputVal / maxVal * 100 + '%';
+
+                    if ($inputChanged.is($inputX)) {
+                        $crossLineX.css('width', newSize);
+                    } else if ($inputChanged.is($inputY)) {
+                        $crossLineY.css('height', newSize);
+                    }
+
+                }
 
             }
 
