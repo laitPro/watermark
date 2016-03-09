@@ -12,6 +12,8 @@
         font-size: 0;
         line-height: 0;
 
+        overflow: hidden;
+
         img {
             max-width: 100%;
             max-height: inherit;
@@ -21,4 +23,17 @@
             max-height: 100%;
         }
     }
+
+    &__tiling {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .watermark {
+            display: inline-block;
+
+            vertical-align: top;
+        }
+    }
 }
+
