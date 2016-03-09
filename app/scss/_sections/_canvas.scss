@@ -20,6 +20,10 @@
         }
 
         .watermark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            
             max-height: 100%;
         }
     }
@@ -30,6 +34,8 @@
         left: 0;
 
         .watermark {
+            position: static;
+            
             display: inline-block;
 
             vertical-align: top;

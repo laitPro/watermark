@@ -1,28 +1,47 @@
 var positionModule = require('./position'),
-    inputNumberModule = require('./input-number');
+    inputNumberModule = require('./input-number'),
+    imgLoaderModule = require('./file-upload');
 
 var $canvas = $('.canvas'),
     $imgWrapper = $('.canvas__inner'),
-    $mainImg = $canvas.find('.main-img'),
-    $watermark = $canvas.find('.watermark'),
+    $mainImg = $('#main-img'),
+    $watermark = $('#watermark'),
     $watermarkPosition = $('#watermark-position'),
+    $bigImgInput = $('#big-img-input'),
+    $watermarkInput = $('#watermark-input'),
     $posInputX = $('.position__input_x'),
     $posInputY = $('.position__input_y');
 
-var _loadImg = function($select, $img) {
-    $img.attr('src', $select.val());
+var _loadImg = function() {
 
-    $img.get(0).onload = function() {
+    var newMaxX = $watermark.length ? $mainImg.width() - $watermark.width() : $mainImg.width(),
+        newMaxY = $watermark.length ? $mainImg.height() - $watermark.height() : $mainImg.height();
 
-        var newMaxX = $watermark.length ? $mainImg.width() - $watermark.width() : $mainImg.width(),
-            newMaxY = $watermark.length ? $mainImg.height() - $watermark.height() : $mainImg.height();
+    inputNumberModule.setLimit($posInputX, 'max', newMaxX);
+    inputNumberModule.setLimit($posInputY, 'max', newMaxY);
 
-        inputNumberModule.setLimit($posInputX, 'max', newMaxX);
-        inputNumberModule.setLimit($posInputY, 'max', newMaxY);
+    var curCoord = positionModule.getGridCoord($watermarkPosition);
+    
+    if (isNaN(curCoord.x) || isNaN(curCoord.y)) {
+        positionModule.setPosition($watermarkPosition, 0, 0);
+    } else {
+        positionModule.setPosition($watermarkPosition, curCoord.x, curCoord.y);  
+    }
+    
+};
 
-        var curCoord = positionModule.getGridCoord($('#watermark-position'));
-        positionModule.setPosition($('#watermark-position'), curCoord.x, curCoord.y);
-    };
+var _uploadBigImg = function() {
+    
+    $bigImgInput.on('imgLoaded', function(e) {
+        
+        imgLoaderModule.drawImage($bigImgInput, $imgWrapper, 'big-img', 'main-img', function($img) {
+            $mainImg = $img;
+            
+            _loadImg();
+        });
+        
+    });
+    
 };
 
 var _dragWatermark = function() {
@@ -41,6 +60,28 @@ var _dragWatermark = function() {
 
     });
 
+};
+
+var _uploadWatermark = function() {
+    
+    var firstLoad = true;
+    
+    $watermarkInput.on('imgLoaded', function(e) {
+        
+        imgLoaderModule.drawImage($watermarkInput, $imgWrapper, 'watermark', 'watermark', function($img) {
+            
+            $watermark = $img;
+
+            _loadImg();
+            
+            if (firstLoad) {
+                _dragWatermark();
+                firstLoad = false;
+            }
+        });
+        
+    });
+    
 };
 
 var _createTilingWatermark = function(gutterX, gutterY) {
@@ -147,46 +188,11 @@ var _changeWatermarkPosition = function() {
 
 };
 
-$('.big-img').on('change', function() {
-
-    var $this = $(this),
-        $mainImg = $canvas.find('.main-img'),
-        $watermark = $canvas.find('.watermark')
-
-    if (!$mainImg.length) {
-        $mainImg = $('<img class="main-img" src="">');
-        $imgWrapper.append($mainImg);
-    }
-
-    _loadImg($this, $mainImg);
-
-});
-
-$('.small-img').on('change', function() {
-
-    var $this = $(this),
-        $watermark = $canvas.find('.watermark'),
-        $mainImg = $canvas.find('.main-img');
-
-    if (!$watermark.length) {
-        $watermark = $('<img class="$watermark" src="">');
-        $watermark
-            .css({
-                'position': 'absolute',
-                'top': 0,
-                'left': 0
-            })
-            .appendTo($imgWrapper);
-    }
-
-    _loadImg($this, $watermark);
-
-});
-
 module.exports = {
     init: function() {
+        _uploadBigImg();
+        _uploadWatermark();
         _changeWatermarkPosition();
-        _dragWatermark();
         _onModeChange();
     }
 }

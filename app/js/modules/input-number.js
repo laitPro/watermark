@@ -128,7 +128,7 @@ var _setupWidget = function() {
             case ('change'):
 
                 // проверяем произошло ли событие в инпуте
-                var $fieldChanged = $target.closest('.input-number__field');
+                var $fieldChanged = $target.closest('.input-number__field');                   
 
                 if ($fieldChanged.length) {
 

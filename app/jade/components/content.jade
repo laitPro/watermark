@@ -1,21 +1,5 @@
 .wrapper
     main.main
-        label Основная картинка
-        select.big-img
-            option(value='default' selected disabled) выберите изображение
-            option(value='http://lorempixel.com/400/400') 400x400
-            option(value='http://lorempixel.com/535/366') 535x366
-            option(value='http://lorempixel.com/500/1000') 500x1000
-            option(value='http://lorempixel.com/1000/500') 1000x500
-        |<br>
-
-        label Маленькая картинка
-        select.small-img
-            option(value='default' selected disabled) выберите изображение
-            option(value='http://lorempixel.com/200/200') 200x200
-            option(value='http://lorempixel.com/100/100') 100x100
-            option(value='http://lorempixel.com/400/1000') 300x1000
-            option(value='http://lorempixel.com/1000/400') 1000x400
 
         .main__container
             .main__container-picture
@@ -24,8 +8,6 @@
                         |Генератор водяных знаков
                 .main__container-picture-display.canvas
                     .canvas__inner
-                        img.main-img(src='http://lorempixel.com/500/500')
-                        img.watermark(src='http://lorempixel.com/100/100' style='position: absolute; top: 0; left: 0')
 
             include aside
 
