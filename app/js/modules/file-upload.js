@@ -35,7 +35,7 @@ var _setupUpload = function() {
             ){
                 input_title.text(file_name);
                 isImgs[file_id] = 'true';
-                displayImage(file_id,displayblock);
+                displayImage(file_id, displayblock);
         }
         else 
             if (isImgs[file_id] === 'false'){
@@ -45,7 +45,7 @@ var _setupUpload = function() {
 }  
 
 // Функция отрисовки изображения из файла : что отрисовываем, где отрисовываем
-var displayImage = function (id,where){
+var displayImage = function (id, where){
     var file = $('#'+id)[0].files[0];
     var reader = new FileReader();
 
