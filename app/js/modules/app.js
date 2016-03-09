@@ -9,6 +9,7 @@ var $canvas = $('.canvas'),
     $watermarkPosition = $('#watermark-position'),
     $bigImgInput = $('#big-img-input'),
     $watermarkInput = $('#watermark-input'),
+    $opacityInput = $('#watermark-opacity'),
     $posInputX = $('.position__input_x'),
     $posInputY = $('.position__input_y');
 
@@ -75,6 +76,7 @@ var _uploadWatermark = function() {
             _loadImg();
             
             if (firstLoad) {
+                _setWatermarkOpacity();
                 _dragWatermark();
                 firstLoad = false;
             }
@@ -84,84 +86,96 @@ var _uploadWatermark = function() {
     
 };
 
-var _createTilingWatermark = function(gutterX, gutterY) {
-
-    var $tiling = $imgWrapper.find('.canvas__tiling'),
-        imgWrapperWidth = $imgWrapper.width(),
-        imgWrapperHeight = $imgWrapper.height(),
-        watermarkWidth = $watermark.width(),
-        watermarkHeight = $watermark.height(),
-        itemsInRow = 0,
-        rows = 0,
-        watermarks = 0,
-        tilingWidth,
-        tilingHeight;
-
-    if (!$tiling.length) {
-        $tiling = $('<div class="canvas__tiling"></div>');
-        $imgWrapper.append($tiling);
-    }
-
-    $tiling.html('');
-
-    itemsInRow = Math.floor(imgWrapperWidth / watermarkWidth);
-    rows = Math.floor(imgWrapperHeight / watermarkHeight);
-    watermarks = itemsInRow * rows;
+var _setWatermarkOpacity = function() {
+    var val = $opacityInput.val();
     
-    $tiling.width((watermarkWidth + gutterX) * itemsInRow);
-    $tiling.height((watermarkHeight + gutterY) * rows);
+    $watermark.css('opacity', val);
+}
 
-    for (var i = 0; i < watermarks; i++) {
-
-        var $watermarkClone = $watermark.clone();
-
-        $watermarkClone.css({
-            'position': 'static',
-            'margin-left': gutterX,
-            'margin-top': gutterY
-        });
-
-        $tiling.append($watermarkClone);
-
-    }
-
+var _changeWatermarkOpacity = function() {
+    
+    $opacityInput.on('change', _setWatermarkOpacity);
+    
 };
 
-var _onModeChange = function() {
-
-    var oldLimitX,
-        oldLimitY;
-
-    $watermarkPosition.on('positionModeChange', function(e) {
-
-        var newMode = $watermarkPosition.attr('data-mode');
-
-        if (newMode === 'tiling') {
-            $watermark.css({
-                'top': 0,
-                'left': 0
-            });
-
-            oldLimitX = parseInt($posInputX.attr('data-max'));
-            oldLimitY = parseInt($posInputY.attr('data-max'));
-
-            inputNumberModule.setLimit($posInputX, 'max', 100);
-            inputNumberModule.setLimit($posInputY, 'max', 100);
-
-            _createTilingWatermark(10, 10);
-
-        } else if (newMode === 'single') {
-
-            inputNumberModule.setLimit($posInputX, 'max', oldLimitX);
-            inputNumberModule.setLimit($posInputY, 'max', oldLimitY);
-
-            var curCoord = positionModule.getGridCoord($('#watermark-position'));
-            positionModule.setPosition($('#watermark-position'), curCoord.x, curCoord.y);
-        }
-
-    });
-
-};
+//var _createTilingWatermark = function(gutterX, gutterY) {
+//
+//    var $tiling = $imgWrapper.find('.canvas__tiling'),
+//        imgWrapperWidth = $imgWrapper.width(),
+//        imgWrapperHeight = $imgWrapper.height(),
+//        watermarkWidth = $watermark.width(),
+//        watermarkHeight = $watermark.height(),
+//        itemsInRow = 0,
+//        rows = 0,
+//        watermarks = 0,
+//        tilingWidth,
+//        tilingHeight;
+//
+//    if (!$tiling.length) {
+//        $tiling = $('<div class="canvas__tiling"></div>');
+//        $imgWrapper.append($tiling);
+//    }
+//
+//    $tiling.html('');
+//
+//    itemsInRow = Math.floor(imgWrapperWidth / watermarkWidth);
+//    rows = Math.floor(imgWrapperHeight / watermarkHeight);
+//    watermarks = itemsInRow * rows;
+//    
+//    $tiling.width((watermarkWidth + gutterX) * itemsInRow);
+//    $tiling.height((watermarkHeight + gutterY) * rows);
+//
+//    for (var i = 0; i < watermarks; i++) {
+//
+//        var $watermarkClone = $watermark.clone();
+//
+//        $watermarkClone.css({
+//            'position': 'static',
+//            'margin-left': gutterX,
+//            'margin-top': gutterY
+//        });
+//
+//        $tiling.append($watermarkClone);
+//
+//    }
+//
+//};
+//
+//var _onModeChange = function() {
+//
+//    var oldLimitX,
+//        oldLimitY;
+//
+//    $watermarkPosition.on('positionModeChange', function(e) {
+//
+//        var newMode = $watermarkPosition.attr('data-mode');
+//
+//        if (newMode === 'tiling') {
+//            $watermark.css({
+//                'top': 0,
+//                'left': 0
+//            });
+//
+//            oldLimitX = parseInt($posInputX.attr('data-max'));
+//            oldLimitY = parseInt($posInputY.attr('data-max'));
+//
+//            inputNumberModule.setLimit($posInputX, 'max', 100);
+//            inputNumberModule.setLimit($posInputY, 'max', 100);
+//
+//            _createTilingWatermark(10, 10);
+//
+//        } else if (newMode === 'single') {
+//
+//            inputNumberModule.setLimit($posInputX, 'max', oldLimitX);
+//            inputNumberModule.setLimit($posInputY, 'max', oldLimitY);
+//
+//            var curCoord = positionModule.getGridCoord($('#watermark-position'));
+//            positionModule.setPosition($('#watermark-position'), curCoord.x, curCoord.y);
+//        }
+//
+//    });
+//
+//};
 
 var _changeWatermarkPosition = function() {
 
@@ -193,6 +207,7 @@ module.exports = {
         _uploadBigImg();
         _uploadWatermark();
         _changeWatermarkPosition();
+        _changeWatermarkOpacity();
         _onModeChange();
     }
 }
