@@ -1,25 +1,31 @@
+var formData,
+    options;
 
-var init = function(form,url,data){
-    var formData = new FormData($(form)[0]);
-        formData.append('imgs_sizes', JSON.stringify(data));
+var init = function($form,$url,$data){
 
-        console.log(formData);
-        console.log(url);
+        formData = new FormData($form.get(0));
+        formData.append('imgs_sizes', JSON.stringify($data));
 
-        var options = {
+        options = {
             type: "POST",
             processData: false,
             contentType: false,
             dataType: "json",
             data: formData,
-            url:url
+            url:$url
         };
-        _sent(options);
-}
 
-var _sent = function (data) {
-    console.log(data);
-    var defer = $.ajax(data);
+        $form.on('submit', _onFormSubmit)
+};
+
+var _onFormSubmit = function (e) {
+    e.preventDefault();
+    _sent();
+};
+
+var _sent = function () {
+    console.log("try sent");
+    var defer = $.ajax(options);
 
     defer.done(function (data) {
         console.log("Done");         
@@ -28,7 +34,7 @@ var _sent = function (data) {
     defer.fail(function (data){
         console.log("Error");
     })
-}
+};
 
 
 module.exports = {

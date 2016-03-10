@@ -1,14 +1,14 @@
 .main__upload-block
     label.upload-block__label
-        span.label__title Исходное изображение
+        label.label__title.label__title_image(for='big-img-input') Исходное изображение
         span.input__wrap.clearfix
             span.file__name Файл не выбран
             span.file__button
-            input(type="file" id="big_img" name="big_img").file__input
+            input(type="file" id="big-img-input" name="big_img").file__input
                 
     label.upload-block__label
-        span.label__title Водяной знак
+        label.label__title.label__title_watermark(for='watermark-input') Водяной знак
         span.input__wrap.clearfix
             span.file__name Файл не выбран
             span.file__button
-            input(type="file" id="water_mark" name="water_mark").file__input
+            input(type="file" id="watermark-input" name="water_mark").file__input

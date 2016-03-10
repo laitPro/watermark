@@ -7,7 +7,7 @@ var sliderInit = function () {
     var rangeSlider = document.getElementById('slider-range');
 
     noUiSlider.create(rangeSlider, {
-        start: [ .6 ],
+        start: [ 1 ],
         range: {
             'min': [  0 ],
             'max': [ 1 ]
@@ -15,33 +15,15 @@ var sliderInit = function () {
         connect: 'lower'
     });
 
-    var rangeSliderValueElement = document.getElementById('slider-range-value');
+    var rangeSliderValueElement = document.getElementById('watermark-opacity');
 
     rangeSlider.noUiSlider.on('update', _opacity);
 
     function _opacity ( values, handle ) {
         rangeSliderValueElement.value = values[handle];
+        $(rangeSliderValueElement).trigger('change');
     };
 
-};
-
-//изменение прозрачности
-var $watermarkImg = $('.main__container-picture-display');
-
-
- function watermarkOpacity () {
-    if (document.getElementById('img_water_mark')){ 
-        var rangeSliderOpacity = document.getElementById('slider-range'),
-            img = document.getElementById('img_water_mark');
-
-        rangeSliderOpacity.noUiSlider.on('update', _setOpacity);
-
-        function _setOpacity (values, handle) {
-            img.style.opacity = values[handle];
-        }
-    } else {
-        setTimeout (watermarkOpacity, 300);
-    }
 };
 
 module.exports = {
@@ -50,10 +32,6 @@ module.exports = {
 
         if ($slider.length) {
             sliderInit();
-        }
-
-        if ($watermarkImg.length) {
-            watermarkOpacity();
         }
 
     }

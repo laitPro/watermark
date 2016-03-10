@@ -1,25 +1,30 @@
-.position
+.position#watermark-position(data-mode='single')
 
-    .position__title Положение
+    header.position__header
+        .position__title Положение
+        ul.position__modes-list
+            li.position__mode(data-mode='tiling')
+                a.position__mode-inner.position__mode-inner_tiling(href=jv0) Режим замощения
+            li.position__mode.position__mode_active(data-mode='single')
+                a.position__mode-inner.position__mode-inner_single(href=jv0) Режим одиночного знака
 
     -
         var grid = [
-            [{x: 0, y: 0}, {x: 50, y: 0}, {x: 100, y: 0}],
-            [{x: 0, y: 50}, {x: 50, y: 50}, {x: 100, y: 50}],
-            [{x: 0, y: 100}, {x: 50, y: 100}, {x: 100, y: 100}]
+            {x: 0, y: 0}, {x: 50, y: 0}, {x: 100, y: 0},
+            {x: 0, y: 50}, {x: 50, y: 50}, {x: 100, y: 50},
+            {x: 0, y: 100}, {x: 50, y: 100}, {x: 100, y: 100}
         ];
 
     .position__grid-wrapper
 
-        table.position__grid
+        .position__grid
 
-            each row in grid
+            each item in grid
 
-                tr.position__grid-row
+                a.position__grid-cell(data-pos-x='#{item.x}' data-pos-y='#{item.y}' href=jv0)
 
-                    each cell in row
-
-                        td.position__grid-cell(data-pos-x='#{cell.x}' data-pos-y='#{cell.y}')
+            span.position__cross-line.position__cross-line_vert
+            span.position__cross-line.position__cross-line_horiz
 
     .position__inputs-wrapper
 
@@ -27,7 +32,7 @@
 
             label.input-number__label X
 
-                input.input-number__field.position__input-x(name='x-position' data-min=0 data-max=200 type='number' value=10)
+                input.input-number__field.position__input.position__input_x(name='x-position' data-min=0 data-max=400 type='number' value=10)
 
             span.input-number__spin.input-number__spin_more Увеличить
             span.input-number__spin.input-number__spin_less Уменьшить
@@ -36,7 +41,7 @@
 
             label.input-number__label Y
 
-                input.input-number__field.position__input-y(name='y-position' data-min=0 data-max=50 type='number' value=0)
+                input.input-number__field.position__input.position__input_y(name='y-position' data-min=0 data-max=400 type='number' value=0)
 
             span.input-number__spin.input-number__spin_more Увеличить
             span.input-number__spin.input-number__spin_less Уменьшить

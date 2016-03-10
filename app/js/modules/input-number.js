@@ -1,6 +1,63 @@
 var $inputNumber = $('.input-number');
 
-var isNumeric = require('../functions/is-numeric');
+var _isNumeric = require('../functions/is-numeric');
+
+var setValue = function($elem, val, change) {
+
+    var triggerChange = change === false ? false : true;
+
+    if ($elem.is('.input-number__field')) {
+        $elem.val(val);
+
+        if (triggerChange) {
+            $elem.trigger('change');
+        }
+    }
+
+};
+
+var getValue = function($elem) {
+
+    if ($elem.is('.input-number__field')) {
+        return parseInt($elem.val());
+    }
+
+};
+
+var setLimit = function($elem, limitEdge, val) {
+
+    if ($elem.is('.input-number__field')) {
+        $elem.attr('data-' + limitEdge, val);
+        $elem.trigger('change');
+    }
+
+};
+
+var _validateValue = function($elem, val) {
+
+    var maxVal = $elem.attr('data-max'),
+        minVal = $elem.attr('data-min');
+
+    // если новое значение не является числом, то ставим инпуту 0
+    if (!_isNumeric(val)) {
+        $elem.val(0);
+
+    // если новое введенное значение больше максимально допустимого, ставим максимальное
+    } else if (parseInt(val) > maxVal) {
+
+        $elem.val(maxVal);
+
+    // если новое введенное значение меньше минимально допустимого, ставим минимальное
+    } else if (parseInt(val) < minVal) {
+
+        $elem.val(minVal);
+
+    } else {
+
+        $elem.val(val);
+    }
+
+};
 
 var _setupWidget = function() {
 
@@ -10,30 +67,30 @@ var _setupWidget = function() {
             $field = $this.find('.input-number__field'),
             fieldVal = 0;
 
-        $field.val(fieldVal);
+        $field.val(0);
 
         $this.on('mousedown click change', function(e) {
 
             var $target = $(e.target),
-                eventType = e.type,
-                maxVal = $field.data('max'),
-                minVal = $field.data('min');
+                eventType = e.type;
 
-            var _changeVal = function() {
+            var _changeValWhenSpinClicked = function() {
 
                 // проверяем был ли клик соверешен по стрелке изменения значения
                 var $spinClicked = $target.closest('.input-number__spin');
 
                 if ($spinClicked.length) {
 
+                    fieldVal = $field.val();
+
                     // если это стрелка увеличения, увеличиваем значение
-                    if ($spinClicked.hasClass('input-number__spin_more') && fieldVal < maxVal) {
-                        $field.val(++fieldVal);
+                    if ($spinClicked.hasClass('input-number__spin_more')) {
+                        setValue($field, ++fieldVal);
 
                     // если это стрелка уменьшения, уменьшаем значение
-                    } else if ($spinClicked.hasClass('input-number__spin_less') && fieldVal > minVal) {
+                    } else if ($spinClicked.hasClass('input-number__spin_less')) {
 
-                        $field.val(--fieldVal);
+                        setValue($field, --fieldVal);
                     }
 
                 }
@@ -45,7 +102,7 @@ var _setupWidget = function() {
             // если тип события клик
             case ('click'):
 
-                _changeVal();
+                _changeValWhenSpinClicked();
                 break;
 
             // если тип события нажатие кнопки мыши
@@ -54,7 +111,7 @@ var _setupWidget = function() {
                 // если кнопка мыши нажата более 700мс начинаем ускоренно менять значение инпута
                 var timer1 = setTimeout(function() {
 
-                    var timer2 = setInterval(_changeVal, 50);
+                    var timer2 = setInterval(_changeValWhenSpinClicked, 50);
 
                     $this.on('mouseup', function() {
                         clearInterval(timer2);
@@ -65,39 +122,23 @@ var _setupWidget = function() {
                 $this.on('mouseup', function() {
                     clearTimeout(timer1);
                 });
+                break;
 
             // если тип события change
-            case 'change':
+            case ('change'):
 
                 // проверяем произошло ли событие в инпуте
-                var $fieldChanged = $target.closest('.input-number__field');
+                var $fieldChanged = $target.closest('.input-number__field');                   
 
                 if ($fieldChanged.length) {
 
                     var newVal = $fieldChanged.val();
 
-                    // если новое значение не является числом, то ставим инпуту 0
-                    if (!isNumeric(newVal)) {
-                        $fieldChanged.val(0);
-
-                    // если новое введенное значение больше максимально допустимого, ставим максимальное
-                    } else if (parseInt(newVal) > maxVal) {
-
-                        $fieldChanged.val(maxVal);
-
-                    // если новое введенное значение меньше минимально допустимого, ставим минимальное
-                    } else if (parseInt(newVal) < minVal) {
-
-                        $fieldChanged.val(minVal);
-                    }
+                    _validateValue($fieldChanged, newVal);
 
                 }
 
-                break;
-
             }
-
-            fieldVal = parseInt($field.val());
 
         });
 
@@ -108,11 +149,15 @@ var _setupWidget = function() {
 module.exports = {
 
     init: function() {
-
         if ($inputNumber.length) {
             _setupWidget();
         }
+    },
 
-    }
+    setValue: setValue,
+
+    getValue: getValue,
+
+    setLimit: setLimit
 
 }

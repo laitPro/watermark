@@ -23,11 +23,27 @@
 .lang__link_ru {
     display: block;
     @include sprite($ru);
+
+    &:hover {
+        @include sprite($ru-active);
+    }
+
+    &.active {
+        @include sprite($ru-active);
+    }
 }
 
 .lang__link_en {
     display: block;
     @include sprite($en);
+
+    &:hover {
+        @include sprite($en-active);
+    }
+
+    &.active {
+        @include sprite($en-active);
+    }
 }
 
 //блок с социальными иконками
