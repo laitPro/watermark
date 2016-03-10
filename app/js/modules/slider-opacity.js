@@ -7,7 +7,7 @@ var sliderInit = function () {
     var rangeSlider = document.getElementById('slider-range');
 
     noUiSlider.create(rangeSlider, {
-        start: [ .6 ],
+        start: [ 1 ],
         range: {
             'min': [  0 ],
             'max': [ 1 ]
