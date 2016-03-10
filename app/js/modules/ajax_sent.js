@@ -31,7 +31,6 @@ var _sent = function (data) {
 }
 
 
-
 module.exports = {
 
     init: function(form,url,data) {
