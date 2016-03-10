@@ -32,8 +32,14 @@ var _setupUpload = function() {
                 input.trigger('imgLoaded');
             
         } else if (isImgs[file_id] === 'false') {
+            if ($('body').attr('lang') === 'ru'){
+                input_title.text("Файл не выбран");
+            }
+            else{
+                input_title.text("File is not selected");
+            }
             
-            input_title.text("Вы ввели не изображение!!!!");
+            
         }
     }
 }  
