@@ -17,6 +17,11 @@ var $canvas = $('.canvas'),
     $data = {},
     $url = '../php/some_php.php';
 
+ 
+var _getDataAboutMode = function(){
+    $watermarkPosition.trigger('positionModeChange');
+}
+
 var getDataAboutImg = function(id) {
     var $img = $('#'+id);
 
@@ -26,7 +31,20 @@ var getDataAboutImg = function(id) {
 };
 
 var _sentForm = function(){
-    ajaxSentModule.init($form,$url,$data);
+
+    ajaxSentModule.init($form,$url,$data, function(){
+        console.log("call back for ajax");
+    });
+
+    $form.on('formSend', function(e, data) {
+        e.preventDefault();
+        console.log("form-send",data);
+    });
+
+    $form.on('formSendError', function(e,data) {
+        e.preventDefault();       
+        console.log("form-send-error");
+    });
 }
 
 var _loadImg = function() {
@@ -169,6 +187,8 @@ var _changeWatermarkOpacity = function() {
 //
 //        var newMode = $watermarkPosition.attr('data-mode');
 //
+//        $data['mode'] = newMode;
+//
 //        if (newMode === 'tiling') {
 //            $watermark.css({
 //                'top': 0,
@@ -227,6 +247,7 @@ module.exports = {
         _uploadWatermark();
         _changeWatermarkPosition();
         _changeWatermarkOpacity();
+        _getDataAboutMode();
         _sentForm();
         //_onModeChange();
     }

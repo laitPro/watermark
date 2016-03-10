@@ -1,11 +1,12 @@
 var formData,
-    options;
+    options,
+    form;
 
 var init = function($form,$url,$data){
+        form = $form;
 
         formData = new FormData($form.get(0));
-        formData.append('imgs_sizes', JSON.stringify($data));
-
+        formData.append('imgs_sizes', JSON.stringify($data)),
         options = {
             type: "POST",
             processData: false,
@@ -15,24 +16,23 @@ var init = function($form,$url,$data){
             url:$url
         };
 
-        $form.on('submit', _onFormSubmit)
+        $form.on('submit', _onFormSubmit);
 };
 
 var _onFormSubmit = function (e) {
     e.preventDefault();
-    _sent();
+    _sent($(this));
 };
 
-var _sent = function () {
-    console.log("try sent");
+var _sent = function (form) {
     var defer = $.ajax(options);
 
-    defer.done(function (data) {
-        console.log("Done");         
+    defer.done(function (data) { 
+        form.trigger('formSend',[data]);    
     });
 
-    defer.fail(function (data){
-        console.log("Error");
+    defer.fail(function (){
+        form.trigger('formSendError');     
     })
 };
 
@@ -40,6 +40,6 @@ var _sent = function () {
 module.exports = {
 
     init: function(form,url,data) {
-            init(form,url,data)
+            init(form,url,data);
         }
 }
