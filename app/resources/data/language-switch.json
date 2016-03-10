@@ -4,6 +4,7 @@
         "settings" : ["Settings", "Настройки"],
         "sourceInput" : ["Original image", "Исходное изображение"],
         "watermarkInput" : ["Watermark", "Водяной знак"],
+        "input" : ["File is not selected", "Файл не выбран"],
         "place" : ["Place", "Положение"],
         "transparency" : ["Transparensy", "Прозрачность"],
         "reset" : ["Reset", "Сброс"],

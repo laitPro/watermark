@@ -11,6 +11,7 @@ var switchLang = function () {
         $('.main__container-aside-shell-title-name').text(lang.settings[i]);
         $('.label__title_image').text(lang.sourceInput[i]);
         $('.label__title_watermark').text(lang.watermarkInput[i]);
+        $('.file__name').text(lang.input[i]);
         $('.position__title').text(lang.place[i]);
         $('.opacity__title').text(lang.transparency[i]);
         $('.main__container-aside-shell-form-container-buttom-reset').text(lang.reset[i]);
@@ -23,7 +24,8 @@ var switchLang = function () {
     $.getJSON('app/resources/data/language-switch.json', function (data) {
 
         var $langRu = $('.lang__link_ru'),
-            $langEn = $('.lang__link_en');
+            $langEn = $('.lang__link_en'),
+            $lang = $('body');
 
         $langEn.on('click', function (e) {
             e.preventDefault();
@@ -32,6 +34,7 @@ var switchLang = function () {
 
             $langEn.addClass('active');
             $langRu.removeClass('active');
+            $lang.attr('lang', 'en');
         });
 
         $langRu.on('click', function (e) {
@@ -40,6 +43,7 @@ var switchLang = function () {
             _itemLang(data.switch, 1);
             $langRu.addClass('active');
             $langEn.removeClass('active');
+            $lang.attr('lang', 'ru');
         });
 
     });
