@@ -6,31 +6,46 @@ var $canvas = $('.canvas'),
     $imgWrapper = $('.canvas__inner'),
     $mainImg = $('#main-img'),
     $watermark = $('#watermark'),
+    $tiling = $imgWrapper.find('.canvas__tiling'),
+    $tilingWrapper,
     $watermarkPosition = $('#watermark-position'),
     $bigImgInput = $('#big-img-input'),
     $watermarkInput = $('#watermark-input'),
     $opacityInput = $('#watermark-opacity'),
     $posInputX = $('.position__input_x'),
-    $posInputY = $('.position__input_y');
+    $posInputY = $('.position__input_y'),
+    imgChanged = false;
 
+// Эта функция проверяет размеры новых загруженных изображений и устанавливает новые ограничения для перемещения 
+// водного знака, в соотвествии с этими вычислениями
 var _loadImg = function() {
-
-    var newMaxX = $watermark.length ? $mainImg.width() - $watermark.width() : $mainImg.width(),
-        newMaxY = $watermark.length ? $mainImg.height() - $watermark.height() : $mainImg.height();
-
-    inputNumberModule.setLimit($posInputX, 'max', newMaxX);
-    inputNumberModule.setLimit($posInputY, 'max', newMaxY);
-
-    var curCoord = positionModule.getGridCoord($watermarkPosition);
     
-    if (isNaN(curCoord.x) || isNaN(curCoord.y)) {
-        positionModule.setPosition($watermarkPosition, 0, 0);
-    } else {
-        positionModule.setPosition($watermarkPosition, curCoord.x, curCoord.y);  
+    if ($watermarkPosition.attr('data-mode') === 'single') {
+        
+        var newMaxX = $watermark.length ? $mainImg.width() - $watermark.width() : $mainImg.width(),
+            newMaxY = $watermark.length ? $mainImg.height() - $watermark.height() : $mainImg.height();
+
+        inputNumberModule.setLimit($posInputX, 'max', newMaxX);
+        inputNumberModule.setLimit($posInputY, 'max', newMaxY);
+
+        var curCoord = positionModule.getGridCoord($watermarkPosition);
+        
+        if (isNaN(curCoord.x) || isNaN(curCoord.y)) {
+            positionModule.setPosition($watermarkPosition, 0, 0);
+        } else {
+            positionModule.setPosition($watermarkPosition, curCoord.x, curCoord.y);  
+        }
+        
+        imgChanged = true;
+        
+    } else if ($watermarkPosition.attr('data-mode') === 'tiling') {
+        
+        _updateTiling(true);
     }
     
 };
 
+// Обработчик загрузки большого изображения
 var _uploadBigImg = function() {
     
     $bigImgInput.on('imgLoaded', function(e) {
@@ -38,13 +53,14 @@ var _uploadBigImg = function() {
         imgLoaderModule.drawImage($bigImgInput, $imgWrapper, 'big-img', 'main-img', function($img) {
             $mainImg = $img;
             
-            _loadImg();
+            setTimeout(_loadImg, 10);
         });
         
     });
     
 };
 
+// drag для водяного знака
 var _dragWatermark = function() {
 
     $watermark.draggabilly({
@@ -63,6 +79,17 @@ var _dragWatermark = function() {
 
 };
 
+var _dragTiling = function() {
+    
+    $tiling.draggabilly({
+        containment: '.canvas__tiling-wrapper'
+    });
+    
+};
+
+var watermarkFirstLoad = true;
+
+// Обработчик загрузки водяного знака
 var _uploadWatermark = function() {
     
     var firstLoad = true;
@@ -73,12 +100,12 @@ var _uploadWatermark = function() {
             
             $watermark = $img;
 
-            _loadImg();
+            setTimeout(_loadImg, 10);
             
-            if (firstLoad) {
+            if (watermarkFirstLoad) {
                 _setWatermarkOpacity();
                 _dragWatermark();
-                firstLoad = false;
+                watermarkFirstLoad = false;
             }
         });
         
@@ -86,97 +113,137 @@ var _uploadWatermark = function() {
     
 };
 
+// установить новое значение прозрачности для водяного знака
 var _setWatermarkOpacity = function() {
-    var val = $opacityInput.val();
+    var val = $opacityInput.val(),
+        $watermarks = $imgWrapper.find('.watermark');
     
-    $watermark.css('opacity', val);
+    $watermarks.css('opacity', val);
 }
 
+// обработчик изменения слайдера прозрачности
 var _changeWatermarkOpacity = function() {
     
     $opacityInput.on('change', _setWatermarkOpacity);
     
 };
+    
+var tilingFirstLoad = true;
 
-//var _createTilingWatermark = function(gutterX, gutterY) {
-//
-//    var $tiling = $imgWrapper.find('.canvas__tiling'),
-//        imgWrapperWidth = $imgWrapper.width(),
-//        imgWrapperHeight = $imgWrapper.height(),
-//        watermarkWidth = $watermark.width(),
-//        watermarkHeight = $watermark.height(),
-//        itemsInRow = 0,
-//        rows = 0,
-//        watermarks = 0,
-//        tilingWidth,
-//        tilingHeight;
-//
-//    if (!$tiling.length) {
-//        $tiling = $('<div class="canvas__tiling"></div>');
-//        $imgWrapper.append($tiling);
-//    }
-//
-//    $tiling.html('');
-//
-//    itemsInRow = Math.floor(imgWrapperWidth / watermarkWidth);
-//    rows = Math.floor(imgWrapperHeight / watermarkHeight);
-//    watermarks = itemsInRow * rows;
-//    
-//    $tiling.width((watermarkWidth + gutterX) * itemsInRow);
-//    $tiling.height((watermarkHeight + gutterY) * rows);
-//
-//    for (var i = 0; i < watermarks; i++) {
-//
-//        var $watermarkClone = $watermark.clone();
-//
-//        $watermarkClone.css({
-//            'position': 'static',
-//            'margin-left': gutterX,
-//            'margin-top': gutterY
-//        });
-//
-//        $tiling.append($watermarkClone);
-//
-//    }
-//
-//};
-//
-//var _onModeChange = function() {
-//
-//    var oldLimitX,
-//        oldLimitY;
-//
-//    $watermarkPosition.on('positionModeChange', function(e) {
-//
-//        var newMode = $watermarkPosition.attr('data-mode');
-//
-//        if (newMode === 'tiling') {
-//            $watermark.css({
-//                'top': 0,
-//                'left': 0
-//            });
-//
-//            oldLimitX = parseInt($posInputX.attr('data-max'));
-//            oldLimitY = parseInt($posInputY.attr('data-max'));
-//
-//            inputNumberModule.setLimit($posInputX, 'max', 100);
-//            inputNumberModule.setLimit($posInputY, 'max', 100);
-//
-//            _createTilingWatermark(10, 10);
-//
-//        } else if (newMode === 'single') {
-//
-//            inputNumberModule.setLimit($posInputX, 'max', oldLimitX);
-//            inputNumberModule.setLimit($posInputY, 'max', oldLimitY);
-//
-//            var curCoord = positionModule.getGridCoord($('#watermark-position'));
-//            positionModule.setPosition($('#watermark-position'), curCoord.x, curCoord.y);
-//        }
-//
-//    });
-//
-//};
+// если параметр create === true, то заново пересоздает всех клонов водяного знака для замощения
+// если false, то пересчитывает размеры обертки для клонов и устанавливает им новые отступы
+var _updateTiling = function(create) {
+    
+    var imgWrapperWidth = $imgWrapper.width(),
+        imgWrapperHeight = $imgWrapper.height(),
+        watermarkWidth = $watermark.width(),
+        watermarkHeight = $watermark.height(),
+        gutterX = inputNumberModule.getValue($posInputX),
+        gutterY = inputNumberModule.getValue($posInputY),
+        itemsInRow = 0,
+        rows = 0,
+        watermarks = 0,
+        tilingWidth,
+        tilingHeight;
+    
+    itemsInRow = Math.floor((imgWrapperWidth + 100) / watermarkWidth) + 2;
+    rows = Math.floor((imgWrapperHeight + 100) / watermarkHeight) + 2;
+    watermarks = itemsInRow * rows;
+    tilingWidth = (watermarkWidth + gutterX) * itemsInRow;
+    tilingHeight = (watermarkHeight + gutterY) * rows;
+    
+    if (create) {
+        
+        if (!$tiling.length) {
+            $tiling = $('<div class="canvas__tiling"></div>');
+            $imgWrapper.append($tiling);
+        }
 
+        $tiling.html('');
+
+        for (var i = 0; i < watermarks; i++) {
+
+            var $watermarkClone = $watermark.clone();
+
+            $watermarkClone
+                .removeAttr('id')
+                .css({
+                    'position': '',
+                    'display': ''
+                });
+
+            $tiling.append($watermarkClone);
+
+        }
+        
+        if (tilingFirstLoad) {
+            $tilingWrapper = $('<div class="canvas__tiling-wrapper"></div>')
+            $tiling.wrapAll($tilingWrapper);
+            
+            $tilingWrapper = $tiling.parent();
+
+            _dragTiling();
+
+            tilingFirstLoad = false;
+        }
+    }
+    
+    $tiling.width(tilingWidth);
+    $tiling.height(tilingHeight); 
+    $tilingWrapper.width($tiling.width() + 100);
+    $tilingWrapper.height($tiling.height() + 100);
+    
+    var $watermarkClones = $tiling.find('.watermark');
+    
+    $watermarkClones.css({
+        'margin-left': gutterX,
+        'margin-top': gutterY
+    });
+    
+};
+
+// обработчик изменения режима отображения водяного знака
+var _onModeChange = function() {
+
+    $watermarkPosition.on('positionModeChange', function(e) {
+
+        var newMode = $watermarkPosition.attr('data-mode');
+
+        if (newMode === 'tiling') {
+            
+            $watermark.css({
+                'top': 0,
+                'left': 0
+            });
+
+            inputNumberModule.setLimit($posInputX, 'max', 100);
+            inputNumberModule.setLimit($posInputY, 'max', 100);
+
+            if (!$tiling.length) {
+                _updateTiling(true);
+            }
+            
+            if (imgChanged) {
+                _loadImg();
+                imgChanged = false;
+            }
+            
+            $tilingWrapper.show();
+            $watermark.hide();
+
+        } else if (newMode === 'single') {
+            
+            $tilingWrapper.hide();
+            $watermark.show();
+
+            _loadImg();
+        }
+
+    });
+
+};
+
+// меняет позицию водяного знака
 var _changeWatermarkPosition = function() {
 
     var $watermarkInputs = $watermarkPosition.find('.position__input');
@@ -196,6 +263,12 @@ var _changeWatermarkPosition = function() {
                 $watermark.css('top', val + 'px');
             }
 
+        } else if ($watermarkPosition.attr('data-mode') === 'tiling') {
+            
+            if ($tiling.length) {
+                _updateTiling();
+            }
+            
         }
 
     });

@@ -7,7 +7,7 @@ var setValue = function($elem, val, change) {
     var triggerChange = change === false ? false : true;
 
     if ($elem.is('.input-number__field')) {
-        $elem.val(val);
+        $elem.val(parseInt(val));
 
         if (triggerChange) {
             $elem.trigger('change');
@@ -35,8 +35,8 @@ var setLimit = function($elem, limitEdge, val) {
 
 var _validateValue = function($elem, val) {
 
-    var maxVal = $elem.attr('data-max'),
-        minVal = $elem.attr('data-min');
+    var maxVal = parseInt($elem.attr('data-max')),
+        minVal = parseInt($elem.attr('data-min'));
 
     // если новое значение не является числом, то ставим инпуту 0
     if (!_isNumeric(val)) {
@@ -65,7 +65,8 @@ var _setupWidget = function() {
 
         var $this = $(this),
             $field = $this.find('.input-number__field'),
-            fieldVal = 0;
+            fieldVal = 0,
+            validationEnd = false;
 
         $field.val(0);
 
@@ -132,9 +133,18 @@ var _setupWidget = function() {
 
                 if ($fieldChanged.length) {
 
-                    var newVal = $fieldChanged.val();
+                    if (!validationEnd) {
+                        var newVal = $fieldChanged.val();
 
-                    _validateValue($fieldChanged, newVal);
+                        _validateValue($fieldChanged, newVal);
+                        
+                        validationEnd = true;
+                        $fieldChanged.trigger('change');
+                        
+                        return;
+                    }
+                    
+                    validationEnd = false;
 
                 }
 

@@ -90,8 +90,8 @@ var _setupWidget = function() {
 
                 $this.attr('data-mode', newMode);
 
-                $inputModule.setValue($inputX, 0);
-                $inputModule.setValue($inputY, 0);
+                $inputModule.setValue($inputX, 0, false);
+                $inputModule.setValue($inputY, 0, false);
 
                 switch (newMode) {
 

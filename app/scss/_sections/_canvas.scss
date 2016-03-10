@@ -27,11 +27,19 @@
             max-height: 100%;
         }
     }
+    
+    &__tiling-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        
+        transform: translate(-50%, -50%);
+    }
 
     &__tiling {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 50px;
+        left: 50px;
 
         .watermark {
             position: static;
