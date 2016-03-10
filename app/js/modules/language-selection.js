@@ -22,16 +22,24 @@ var switchLang = function () {
     //обращение к JSON файлу
     $.getJSON('app/resources/data/language-switch.json', function (data) {
 
-        $('.lang__link_en').on('click', function (e) {
+        var $langRu = $('.lang__link_ru'),
+            $langEn = $('.lang__link_en');
+
+        $langEn.on('click', function (e) {
             e.preventDefault();
 
             _itemLang(data.switch, 0);
+
+            $langEn.addClass('active');
+            $langRu.removeClass('active');
         });
 
-        $('.lang__link_ru').on('click', function (e) {
+        $langRu.on('click', function (e) {
             e.preventDefault();
 
             _itemLang(data.switch, 1);
+            $langRu.addClass('active');
+            $langEn.removeClass('active');
         });
 
     });
