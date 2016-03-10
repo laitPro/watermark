@@ -6,11 +6,14 @@ $(function() {
         sliderOpacitySlider = require('./modules/slider-opacity'),
         positionModule = require('./modules/position'),
         imgupload = require('./modules/file-upload'),
+        appModule = require('./modules/app'),
         chagneLanguage = require('./modules/language-selection');
 
     positionModule.init();
     inputNumberModule.init();
     sliderOpacitySlider.init();
     imgupload.init();
+    appModule.init();
     chagneLanguage.init();
 });
+
