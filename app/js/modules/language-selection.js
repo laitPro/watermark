@@ -11,6 +11,7 @@ var switchLang = function () {
         $('.main__container-aside-shell-title-name').text(lang.settings[i]);
         $('.label__title_image').text(lang.sourceInput[i]);
         $('.label__title_watermark').text(lang.watermarkInput[i]);
+        $('.file__name').text(lang.input[i]);
         $('.position__title').text(lang.place[i]);
         $('.opacity__title').text(lang.transparency[i]);
         $('.main__container-aside-shell-form-container-buttom-reset').text(lang.reset[i]);
