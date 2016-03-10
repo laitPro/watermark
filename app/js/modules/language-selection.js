@@ -24,7 +24,8 @@ var switchLang = function () {
     $.getJSON('app/resources/data/language-switch.json', function (data) {
 
         var $langRu = $('.lang__link_ru'),
-            $langEn = $('.lang__link_en');
+            $langEn = $('.lang__link_en'),
+            $lang = $('body');
 
         $langEn.on('click', function (e) {
             e.preventDefault();
@@ -33,6 +34,7 @@ var switchLang = function () {
 
             $langEn.addClass('active');
             $langRu.removeClass('active');
+            $lang.attr('lang', 'en');
         });
 
         $langRu.on('click', function (e) {
@@ -41,6 +43,7 @@ var switchLang = function () {
             _itemLang(data.switch, 1);
             $langRu.addClass('active');
             $langEn.removeClass('active');
+            $lang.attr('lang', 'ru');
         });
 
     });
