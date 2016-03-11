@@ -13,9 +13,9 @@ var $canvas = $('.canvas'),
     $opacityInput = $('#watermark-opacity'),
     $posInputX = $('.position__input_x'),
     $posInputY = $('.position__input_y'),
-    $form = $('.main__container-aside-shell-form'),
+    $form = $('form.main__container-aside-shell-form'),
     $data = {},
-    $url = '../php/some_php.php';
+    $url = './php/some_php.php';
 
  
 var _getDataAboutMode = function(){
@@ -32,9 +32,11 @@ var getDataAboutImg = function(id) {
 
 var _sentForm = function(){
 
-    ajaxSentModule.init($form,$url,$data, function(){
-        console.log("call back for ajax");
+    $form.on('submit', function(event) {
+        event.preventDefault();
+        ajaxSentModule.init($form,$url,$data);
     });
+
 
     $form.on('formSend', function(e, data) {
         e.preventDefault();
