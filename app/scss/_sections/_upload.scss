@@ -68,6 +68,10 @@
     border-right: 0px none;
 }
 
+.file__name_upload{
+    @extend .file__name;
+}
+
 .file__button {
     display: block;
     float: right;
