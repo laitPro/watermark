@@ -28,6 +28,8 @@ var _setupUpload = function() {
             ) {
                 input_title.text(file_name);
                 isImgs[file_id] = 'true';
+                input_title.removeClass('file__name');
+                input_title.addClass('file__name_upload');
             
                 input.trigger('imgLoaded');
             
