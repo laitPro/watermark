@@ -1,0 +1,53 @@
+.canvas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__inner {
+        position: relative;
+
+        max-width: 100%;
+        max-height: 535px;
+
+        font-size: 0;
+        line-height: 0;
+
+        overflow: hidden;
+
+        img {
+            max-width: 100%;
+            max-height: inherit;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            
+            max-height: 100%;
+        }
+    }
+    
+    &__tiling-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        
+        transform: translate(-50%, -50%);
+    }
+
+    &__tiling {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+
+        .watermark {
+            position: static;
+            
+            display: inline-block;
+
+            vertical-align: top;
+        }
+    }
+}
+

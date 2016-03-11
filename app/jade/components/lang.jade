@@ -1,0 +1,7 @@
+.lang
+    ul.lang__list
+        - var lang = [{lang:'ru', link:'#', act:'active'}, {lang:'en', link:'#', act:''}]
+        each item in lang
+            li.lang__item
+                a(href='#{item.link}' class="lang__link_#{item.lang} #{item.act}").lang__link
+                    |#{item.lang}
