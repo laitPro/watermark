@@ -10,7 +10,8 @@ $(function() {
         ajax = require('./modules/ajax_sent'),
 
         appModule = require('./modules/app'),
-        chagneLanguage = require('./modules/language-selection');
+        chagneLanguage = require('./modules/language-selection'),
+        socialSharing = require('./modules/sharing');
 
     blocked.init();
     positionModule.init();
@@ -21,6 +22,7 @@ $(function() {
 
     appModule.init();
     chagneLanguage.init();
+    socialSharing.init();
 
     
      
