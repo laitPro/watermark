@@ -1,0 +1,26 @@
+aside.main__container-aside
+    .main__container-aside-shell
+            .main__container-aside-shell-title
+                h2.main__container-aside-shell-title-name
+                    |Настройки
+            form.main__container-aside-shell-form
+
+                .main__container-aside-shell-form-container
+                    .main__container-aside-shell-form-container-upLoad.asideBloks-indents.upload-wrapper
+                        include upload
+                    .section-block.section-block_main
+                        .main__container-aside-shell-form-container-fence
+
+                        .main__container-aside-shell-form-container-position.asideBloks-indents
+                            include position
+                        .main__container-aside-shell-form-container-fence
+
+                        .main__container-aside-shell-form-container-opacity.asideBloks-indents
+                            include opacity
+                        .main__container-aside-shell-form-container-fence
+
+                        .main__container-aside-shell-form-container-buttom.asideBloks-indents
+                            button.main__container-aside-shell-form-container-buttom-reset(type="reset" value="Сброс")
+                                |Сброс
+                            button.main__container-aside-shell-form-container-buttom-Upload(type="submit")
+                                |Скачать

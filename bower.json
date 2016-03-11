@@ -22,7 +22,8 @@
     "nouislider": "^8.3.0",
     "blueimp-file-upload": "https://github.com/blueimp/jQuery-File-Upload.git#~9.12.1",
     "jquery-ui": "^1.11.4",
-    "draggabilly": "^2.1.0"
+    "draggabilly": "^2.1.0",
+    "blockUI": "https://github.com/malsup/blockui.git"
   },
   "overrides": {
     "jquery-ui": {
@@ -40,5 +41,8 @@
         "dist/draggabilly.pkgd.js"
       ]
     }
+  },
+  "devDependencies": {
+    "blockUI": "https://github.com/malsup/blockui.git"
   }
 }
