@@ -76,6 +76,8 @@ var _uploadBigImg = function() {
             getDataAboutImg('big-img');
         });
         
+    $('.section-block_wat').unblock();    
+        
     });
     
 };
@@ -118,8 +120,12 @@ var _uploadWatermark = function() {
 
             getDataAboutImg('watermark');
         });
+
+        $('.section-block_main').unblock();
         
     });
+
+
     
 };
 
