@@ -15,7 +15,7 @@ var $canvas = $('.canvas'),
     $posInputY = $('.position__input_y'),
     $form = $('form.main__container-aside-shell-form'),
     $data = {},
-    $url = './php/some_php.php';
+    $url = './php/load.php';
 
  
 var _getDataAboutMode = function(){
