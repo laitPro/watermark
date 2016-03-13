@@ -12,7 +12,8 @@ $(function() {
 
         appModule = require('./modules/app'),
         chagneLanguage = require('./modules/language-selection'),
-        socialSharing = require('./modules/sharing');
+        socialSharing = require('./modules/sharing'),
+        resetModule = require('./modules/reset');
 
     blocked.init();
     positionModule.init();
@@ -24,7 +25,6 @@ $(function() {
     appModule.init();
     chagneLanguage.init();
     socialSharing.init();
-
-    
-     
+    resetModule.init();
+  
 });

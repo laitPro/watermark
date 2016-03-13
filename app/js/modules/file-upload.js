@@ -1,5 +1,5 @@
 var $input_imgs = $('input[type=file]');
-var $input_imgs_text = $('.file__name');
+var $input_imgs_text = $('.fn');
 var isImgs = {};
 
 var _setupUpload = function() {
