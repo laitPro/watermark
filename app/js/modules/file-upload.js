@@ -96,9 +96,13 @@ var reset($inputs) = function() {
         
         if ($('body').attr('lang') === 'ru'){
             $(el).text("Файл не выбран");
+            $(this).removeClass('file__name');
+            $(this).addClass('file__name_upload');
         }
         else
             $(el).text("File is not selected");
+            $(this).removeClass('file__name_upload');
+            $(this).addClass('file__name');
     });
 
 };
