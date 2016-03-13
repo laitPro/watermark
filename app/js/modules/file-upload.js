@@ -23,10 +23,11 @@ var _setupUpload = function() {
         var file_id = input.attr('id');
         var input_title = input.prevAll('.file__name');
 
-        if ((file_format === 'png') || 
+        if (((file_format === 'png') || 
             (file_format === 'jpg') ||
-            (file_format === 'JPG')
+            (file_format === 'JPG')) && (input[0].files[0].size < 2500000)
             ) {
+                    console.log(input[0].files[0].size);
                 input_title.text(file_name);
                 isImgs[file_id] = 'true';
                 input_title.removeClass('file__name');
@@ -59,6 +60,7 @@ var drawImage = function ($input, $where, id, className, callback) {
     }
     
     reader.onload = function () {
+
         
         var $imgOld = $('#' + id);
         

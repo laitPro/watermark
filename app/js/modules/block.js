@@ -35,7 +35,7 @@ var init = function() {
 	    // styles for the overlay 
 	    overlayCSS:  { 
 	        backgroundColor: '#000', 
-	        opacity:         .1, 
+	        opacity:         .01, 
 	        cursor:          null 
 	    }, 
 	 

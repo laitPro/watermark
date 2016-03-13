@@ -41,7 +41,7 @@ var _sentForm = function(){
             $data['offset-x'] = pos_tilling.left -  pos_canvas_inner.left;
             $data['offset-y'] = pos_tilling.top - pos_canvas_inner.top;
         }
-
+        console.log($data);
         ajaxSentModule.init($form,$url,$data);
     });
 
