@@ -21,7 +21,7 @@ var switchLang = function () {
 
 
     //обращение к JSON файлу
-    $.getJSON('app/resources/data/language-switch.json', function (data) {
+    $.getJSON('./data/language-switch.json', function (data) {
 
         var $langRu = $('.lang__link_ru'),
             $langEn = $('.lang__link_en'),
