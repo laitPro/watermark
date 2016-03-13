@@ -2,6 +2,12 @@ var $lang = $('.social__link');
 
 
 var sharing = function () {
+
+    var purl = location.host, //TODO: здесь вписать URL нашего сайте
+        pimg = 'app/resources/img/backgroundImg.jpg', //TODO: URL к заглавной картинке нашего сайта
+        ptitle = $('title').text(),
+        ptext = $('meta[name="description"]').attr('content');
+
     var Share = {
         vkontakte: function(purl, ptitle, pimg, text) {
             url  = 'http://vkontakte.ru/share.php?';
@@ -34,12 +40,10 @@ var sharing = function () {
             window.open(url,'','toolbar=0,status=0,width=626,height=436');
         }
     };
-    var purl = location.host; //TODO: здесь вписать URL нашего сайте
-    var pimg = 'http://img.tourister.ru/files/6/1/4/9/9/7/6/clones/600_600_fixed.jpg'; //TODO: URL к заглавной картинке нашего сайта
-    var ptitle = $('title').text(); //по клику?
-    var ptext = $('meta[name="description"]').attr('content');
 
-
+    $('.social__link_like').on('click', function(e){
+        e.preventDefault();
+    })
 
     $('.social__link_vk').on('click', function () {
         Share.vkontakte(purl, ptitle, pimg, ptext)
