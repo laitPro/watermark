@@ -88,17 +88,18 @@ var reset = function($inputs) {
     $inputs.each(function() {
         
         var $this = $(this),
-            $text = $this.find('.file__name_upload');
+            $container = $this.closest('.input__wrap '),
+            $text = $container.find('.fn');
         
-        isImgs[$(el).attr('id')] = 'false';
+        isImgs[$this.attr('id')] = 'false';
         
         $text.toggleClass('file__name_upload file__name');
         
         if ($('body').attr('lang') === 'ru'){
-            $(el).text("Файл не выбран");
+            $text.text("Файл не выбран");
         }
         else
-            $(el).text("File is not selected");
+            $text.text("File is not selected");
     });
 
 };

@@ -1,5 +1,4 @@
 var $position = $('.position'),
-    $display = $('.main__container-picture-display'),
     $inputModule = require('./input-number');
 
 var setPosition = function($block, positionX, positionY) {
@@ -114,8 +113,7 @@ var _setupWidget = function() {
         $this.on('change', function(e) {
 
             var $target = $(e.target),
-                $inputChanged = $target.closest('.position__input'),
-                $watermark = $display.find('.watermark');
+                $inputChanged = $target.closest('.position__input');
 
             if ($inputChanged.length) {
 
@@ -141,6 +139,30 @@ var _setupWidget = function() {
 
 };
 
+var reset = function($block) {
+  
+    if ($block.is('.position')) {
+        
+        var $inputs = $block.find('.position__input'),
+            $activeCell = $block.find('.position__grid-cell_active'),
+            $positionModeSwitch = $block.find('.position__mode-inner_single');
+        
+        $activeCell.removeClass('position__grid-cell_active');
+        
+        $positionModeSwitch.trigger('click');
+        
+        $inputs.each(function() {
+            
+            var $this = $(this);
+            
+            $inputModule.setValue($this, 0);
+            
+        });
+        
+    }
+    
+};
+
 module.exports = {
 
     init: function() {
@@ -155,6 +177,8 @@ module.exports = {
 
     setInputChangeCallback: function(callback) {
         _inputChangeCallback = callback;
-    }
+    },
+    
+    reset: reset
 
 };
