@@ -229,8 +229,8 @@ var _onModeChange = function() {
         if (newMode === 'tiling') {
             
             $watermark.css({
-                'top': 0,
-                'left': 0
+                'top': 50,
+                'left': 50
             });
 
             inputNumberModule.setLimit($posInputX, 'max', 100);
