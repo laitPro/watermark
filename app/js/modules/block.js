@@ -124,7 +124,7 @@ var init = function() {
 	}; 
 
      
-    $('.section-block').block(); 
+    $('.section-block').block();
 
 }
 

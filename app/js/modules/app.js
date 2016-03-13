@@ -1,7 +1,8 @@
 var positionModule = require('./position'),
     inputNumberModule = require('./input-number'),
     imgLoaderModule = require('./file-upload'),
-    ajaxSentModule = require('./ajax_sent.js');
+    ajaxSentModule = require('./ajax_sent'),
+    reset = require('./reset');
 
 var $canvas = $('.canvas'),
     $imgWrapper = $('.canvas__inner'),
@@ -27,8 +28,20 @@ var getDataAboutImg = function(id) {
 
     $data[$img.attr('id')+"_client_width"] = $img.width();
     $data[$img.attr('id')+"_client_height"] = $img.height();
+    console.log($data);
 
 };
+
+var _resetForm = function (){
+
+    $form.on('main-formReset', function(){
+        imgLoaderModule.reset();
+        $data = {};
+        imgLoaderModule.deleteimgs($imgWrapper);
+        $('.section-block').block(); 
+    });
+
+}
 
 var _sentForm = function(){
 
@@ -257,6 +270,7 @@ module.exports = {
         _changeWatermarkOpacity();
         _getDataAboutMode();
         _sentForm();
+        _resetForm();
         //_onModeChange();
     }
 }
