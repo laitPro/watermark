@@ -109,6 +109,22 @@ var _setupWidget = function() {
             }
 
         });
+        
+        $this.on('keydown', function(e) {
+           
+            var $target = $(e.target),
+                $inputKeyPressed = $target.closest('.position__input');
+            
+            if ($inputKeyPressed.length) {
+                
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                    $inputKeyPressed.trigger('change');
+                }
+                
+            }
+            
+        });
 
         $this.on('change', function(e) {
 
