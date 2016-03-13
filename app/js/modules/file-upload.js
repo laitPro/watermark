@@ -83,27 +83,26 @@ var deleteImgs = function($where){
 
 };
 
-var reset = function() {
+var reset = function($inputs) {
 
-    $input_imgs.each(function(index, el) {
-        isImgs[$(el).attr('id')] = 'false';
-    });
-
-    $input_imgs_text.each(function(index, el) {
-
-        $(this).removeClass('file__name_upload');
-
+    $inputs.each(function() {
+        
+        var $this = $(this),
+            $container = $this.closest('.input__wrap '),
+            $text = $container.find('.fn');
+        
+        isImgs[$this.attr('id')] = 'false';
+        
+        $text.toggleClass('file__name_upload file__name');
+        
         if ($('body').attr('lang') === 'ru'){
-            $(el).text("Файл не выбран");
-            $(this).removeClass('file__name');
-            $(this).addClass('file__name_upload');
+            $text.text("Файл не выбран");
         }
         else
-            $(el).text("File is not selected");
-            $(this).removeClass('file__name_upload');
-            $(this).addClass('file__name');
+            $text.text("File is not selected");
     });
-}
+
+};
 
 // Функция валидации инпутов
 var validate = function(){

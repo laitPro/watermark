@@ -9,10 +9,11 @@ var $canvas = $('.canvas'),
     $mainImg = $('#main-img'),
     $watermark = $('#watermark'),
     $tiling = $imgWrapper.find('.canvas__tiling'),
-    $tilingWrapper,
+    $tilingWrapper = $imgWrapper.find('.canvas__tiling-wrapper'),
     $watermarkPosition = $('#watermark-position'),
     $bigImgInput = $('#big-img-input'),
     $watermarkInput = $('#watermark-input'),
+    opacitySlider = document.getElementById('slider-range'),
     $opacityInput = $('#watermark-opacity'),
     $posInputX = $('.position__input_x'),
     $posInputY = $('.position__input_y'),
@@ -21,9 +22,6 @@ var $canvas = $('.canvas'),
     $url = './php/load.php',
     imgChanged = false;
 
-var _getDataAboutMode = function(){
-    $watermarkPosition.trigger('positionModeChange');
-};
 
 var getDataAboutImg = function(id) {
     var $img = $('#'+id);
@@ -33,21 +31,17 @@ var getDataAboutImg = function(id) {
 
 };
 
-var _resetForm = function (){
-
-    $form.on('main-formReset', function(){
-        imgLoaderModule.reset();
-        $data = {};
-        imgLoaderModule.deleteimgs($imgWrapper);
-        $('.section-block').block(); 
-        console.log($data);
-    });
-
-};
-
 var _sentForm = function(){
     $form.on('submit', function(event) {
         event.preventDefault();
+
+        if ($data['mode'] === 'tiling'){
+            var pos_tilling = $('.canvas__tiling').offset();
+            var pos_canvas_inner = $('.canvas__inner').offset();
+            $data['offset-x'] = pos_tilling.left -  pos_canvas_inner.left;
+            $data['offset-y'] = pos_tilling.top - pos_canvas_inner.top;
+        }
+
         ajaxSentModule.init($form,$url,$data);
     });
 
@@ -93,8 +87,6 @@ var _loadImg = function() {
 
         $data['mode'] = 'tiling';
     }
-
-    console.log($data);
     
 };
 
@@ -105,6 +97,11 @@ var _uploadBigImg = function() {
         
         imgLoaderModule.drawImage($bigImgInput, $imgWrapper, 'big-img', 'main-img', function($img) {
             $mainImg = $img;
+            
+            if (!$mainImg.is(':visible')) {
+                $mainImg.show();
+            }
+            
             getDataAboutImg('big-img');
             setTimeout(_loadImg, 10); // костыль для IE, без этого он берет размеры старого изображения
         });
@@ -152,6 +149,10 @@ var _uploadWatermark = function() {
         imgLoaderModule.drawImage($watermarkInput, $imgWrapper, 'watermark', 'watermark', function($img) {
             
             $watermark = $img;
+            
+            if (!$watermark.is(':visible')) {
+                $watermark.show();
+            }
 
             setTimeout(_loadImg, 10); // костыль для IE, без этого он берет размеры старого изображения
             
@@ -328,6 +329,32 @@ var _changeWatermarkPosition = function() {
             
         }
 
+    });
+
+};
+
+
+var _resetForm = function (){
+
+    $form.on('reset', function(){
+        
+        imgLoaderModule.reset($watermarkInput);
+        imgLoaderModule.reset($bigImgInput);
+        positionModule.reset($watermarkPosition);
+        
+        $watermark.hide();
+        $mainImg.hide();
+        
+        if ($tilingWrapper.length) {
+            $tilingWrapper.hide();
+        }
+        
+        opacitySlider.noUiSlider.set(1);
+        
+        $data = {};
+        
+        $('.section-block').block();
+        
     });
 
 };
