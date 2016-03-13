@@ -38,7 +38,7 @@ var _sentForm = function(){
         if ($data['mode'] === 'tiling'){
             var pos_tilling = $('.canvas__tiling').offset();
             var pos_canvas_inner = $('.canvas__inner').offset();
-            var canvas = $('.canvas__inner');
+            var canvas = $('.canvas__tiling');
             $data['canvas-width'] = canvas.width();
             $data['canvas-height'] = canvas.height();
             $data['offset-x'] = pos_tilling.left -  pos_canvas_inner.left;
