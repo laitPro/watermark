@@ -3,7 +3,7 @@ var $lang = $('.social__link');
 
 var sharing = function () {
 
-    var purl = location.host, //TODO: здесь вписать URL нашего сайте
+    var purl = 'http://team6_watermark.nikula-m.ru/', 
         pimg = 'app/resources/img/backgroundImg.jpg', //TODO: URL к заглавной картинке нашего сайта
         ptitle = $('title').text(),
         ptext = $('meta[name="description"]').attr('content');
