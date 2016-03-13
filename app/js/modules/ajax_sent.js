@@ -3,10 +3,10 @@ var formData,
 
 var init = function($form,$url,$data){
         var form = $form[0];
-        console.log(form);
+        //console.log(form);
         formData = new FormData(form);
         formData.append('imgs_sizes', JSON.stringify($data));
-        console.log(formData);
+        //console.log(formData);
         options = {
             type: "POST",
             processData: false,
@@ -15,17 +15,16 @@ var init = function($form,$url,$data){
             data: formData,
             url:$url
         };
-        console.log(options);
+        //console.log(options);
         _sent($form);
 };
-
 
 var _sent = function (form) {
     var defer = $.ajax(options);
 
-    defer.done(function (data) { 
-        console.log("done");
-        form.trigger('formSend',[data]);    
+    defer.done(function (data) {
+        window.location = "./php/new.php?name=result.jpg";
+        form.trigger('formSend',[data]);
     });
 
     defer.fail(function (){
@@ -34,9 +33,7 @@ var _sent = function (form) {
     })
 };
 
-
 module.exports = {
-
     init: function(form,url,data) {
             init(form,url,data);
         }
