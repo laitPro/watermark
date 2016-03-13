@@ -334,12 +334,13 @@ var _changeWatermarkPosition = function() {
 };
 
 
-var _resetForm = function (){
+var _resetForm = function () {
+    
+    var $fileInputs = $().add($watermarkInput).add($bigImgInput);
 
     $form.on('reset', function(){
         
-        imgLoaderModule.reset($watermarkInput);
-        imgLoaderModule.reset($bigImgInput);
+        imgLoaderModule.reset($fileInputs);
         positionModule.reset($watermarkPosition);
         
         $watermark.hide();
