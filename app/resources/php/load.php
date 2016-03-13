@@ -1,17 +1,24 @@
 <?php
 
+
 // Config variables
 $path = $_SERVER["DOCUMENT_ROOT"]; // base path
-$uploads = '/php/files/'; // udloads dir
+$uploads = '/php/files/'; // udloads dir (if lockal add this /watermark/dist) 
 $max_size = 2500000; // max size of upload file in bits
 
 if (!file_exists('files')) {
 		mkdir('files',0777);
 }
 
+if (file_exists('./files')) {
+	foreach (glob('./files/*') as $file):
+		unlink($file);
+	endforeach;
+}
+
 $files = $_FILES;
 $valid_extension = array('.jpg', '.jpeg', '.png', '.gif');
-$data = array();
+// $data = array();
 
 foreach( $files as $file ):
 	$type = strtolower(strrchr($file['name'], '.'));
@@ -41,6 +48,8 @@ if ($data) {
 	$sizes = $_POST['imgs_sizes'];
 	$sizes_dec = json_decode($sizes, true);
 	$big_img_w = $sizes_dec['big-img_client_width'];
+	$big_img_h = $sizes_dec['big-img_client_height'];
+	$wtm_h = $sizes_dec['watermark_client_height'];
 	$wtm_w = $sizes_dec['watermark_client_width'];
 	$x_pos = $_POST['x-position'];
 	$y_pos = $_POST['y-position'];
@@ -49,9 +58,44 @@ if ($data) {
 	$bigimage->fit_to_width($big_img_w);
 	$watermark = new libs\SimpleImage('files/'.$data['water_mark']['filename']);
 	$watermark->fit_to_width($wtm_w);
-	$bigimage->overlay($watermark, 'top left', $opacity, $x_pos, $y_pos)->save('result.jpg');
-	$data = __DIR__.'\result.jpg';
+
+
+	$mode = $sizes_dec['mode'];
+
+	if ($mode == 'single') {
+		$bigimage->overlay($watermark, 'top left', $opacity, $x_pos, $y_pos)->save('result.jpg');
+		$data = __DIR__.'\result.jpg';
+	}
+
+	if ($mode == 'tiling') {
+
+		$indent_x = $_POST['x-position'];
+		$indent_y = $_POST['y-position'];
+		$x_pos = $sizes_dec['offset-x']+$indent_x;
+		$y_pos = $sizes_dec['offset-y']+$indent_y;
+		$x_count = ceil( $sizes_dec['canvas-width'] / $wtm_w );
+		$y_count = ceil( $sizes_dec['canvas-height'] / $wtm_h );
+		$total_count = $x_count * $y_count;
+		$space_x = $wtm_w+$indent_x;
+		$space_y = $wtm_h+$indent_y;
+		$offset_x = 0;
+		$offset_y = 0;
+		$count = 0;
+		while ($count <= $total_count) {
+			$bigimage->overlay($watermark, 'top left', $opacity, $x_pos, $y_pos);
+			$x_pos = $x_pos+$space_x;
+			$count++;
+			$offset_x++;
+			if ($offset_x == $x_count) {
+				$y_pos = $y_pos+$space_y;
+				$x_pos = $sizes_dec['offset-x']+$indent_x;
+				$offset_x = 0;
+			}
+		}
+		$bigimage->save('result.jpg');
+		$data = __DIR__.'\result.jpg';
+	}
 }
 
-echo json_encode($data);
+echo json_encode($_POST);
 exit(0);
