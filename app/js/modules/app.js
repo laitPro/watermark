@@ -38,10 +38,13 @@ var _sentForm = function(){
         if ($data['mode'] === 'tiling'){
             var pos_tilling = $('.canvas__tiling').offset();
             var pos_canvas_inner = $('.canvas__inner').offset();
+            var canvas = $('.canvas__tiling');
+            $data['canvas-width'] = canvas.width();
+            $data['canvas-height'] = canvas.height();
             $data['offset-x'] = pos_tilling.left -  pos_canvas_inner.left;
             $data['offset-y'] = pos_tilling.top - pos_canvas_inner.top;
         }
-
+        console.log($data);
         ajaxSentModule.init($form,$url,$data);
     });
 
@@ -334,12 +337,13 @@ var _changeWatermarkPosition = function() {
 };
 
 
-var _resetForm = function (){
+var _resetForm = function () {
+    
+    var $fileInputs = $().add($watermarkInput).add($bigImgInput);
 
     $form.on('reset', function(){
         
-        imgLoaderModule.reset($watermarkInput);
-        imgLoaderModule.reset($bigImgInput);
+        imgLoaderModule.reset($fileInputs);
         positionModule.reset($watermarkPosition);
         
         $watermark.hide();
