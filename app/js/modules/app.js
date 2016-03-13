@@ -13,6 +13,7 @@ var $canvas = $('.canvas'),
     $watermarkPosition = $('#watermark-position'),
     $bigImgInput = $('#big-img-input'),
     $watermarkInput = $('#watermark-input'),
+    opacitySlider = document.getElementById('slider-range'),
     $opacityInput = $('#watermark-opacity'),
     $posInputX = $('.position__input_x'),
     $posInputY = $('.position__input_y'),
@@ -347,6 +348,8 @@ var _resetForm = function (){
         if ($tilingWrapper.length) {
             $tilingWrapper.hide();
         }
+        
+        opacitySlider.noUiSlider.set(1);
         
         $data = {};
         
