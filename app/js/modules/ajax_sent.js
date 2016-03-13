@@ -2,10 +2,11 @@ var formData,
     options;
 
 var init = function($form,$url,$data){
-
-        formData = new FormData($form.get(0));
+        var form = $form[0];
+        console.log(form);
+        formData = new FormData(form);
         formData.append('imgs_sizes', JSON.stringify($data));
-
+        console.log(formData);
         options = {
             type: "POST",
             processData: false,
@@ -14,25 +15,22 @@ var init = function($form,$url,$data){
             data: formData,
             url:$url
         };
-
-        $form.on('submit', _onFormSubmit)
+        console.log(options);
+        _sent($form);
 };
 
-var _onFormSubmit = function (e) {
-    e.preventDefault();
-    _sent();
-};
 
-var _sent = function () {
-    console.log("try sent");
+var _sent = function (form) {
     var defer = $.ajax(options);
 
-    defer.done(function (data) {
-        console.log("Done");         
+    defer.done(function (data) { 
+        console.log("done");
+        form.trigger('formSend',[data]);    
     });
 
-    defer.fail(function (data){
-        console.log("Error");
+    defer.fail(function (){
+        console.log("error");
+        form.trigger('formSendError');     
     })
 };
 
@@ -40,6 +38,6 @@ var _sent = function () {
 module.exports = {
 
     init: function(form,url,data) {
-            init(form,url,data)
+            init(form,url,data);
         }
 }

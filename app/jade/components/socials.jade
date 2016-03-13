@@ -3,9 +3,9 @@
         li.social__item.social__item_like
             a(href="jv0" class="social__link_like").social__link
                 |like
-            - var soc = [{soc:'fb', link:'jv0'}, {soc:'twt', link:'jv0'}, {soc:'vk', link:'jv0'}]
+            - var soc = [{soc:'fb'}, {soc:'twt'}, {soc:'vk'}]
             ul.social__list-inner
                 each item in soc
                     li.social__item
-                        a(href="#{item.link}" class="social__link_#{item.soc}").social__link
+                        a(class="social__link_#{item.soc}").social__link
                             |#{item.soc}

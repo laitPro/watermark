@@ -8,6 +8,20 @@
 }
 
 /* Блок с загрузкой файлов */
+.upload-wrapper{
+    margin: 0;
+}
+
+.section-block{
+    width: 260px;
+
+    .upload-block__label{
+        padding-bottom: 30px;
+        margin-bottom: 0;
+    }
+}
+
+
 .main__upload-block {
     display: inline-block;
 }
@@ -15,11 +29,10 @@
 .upload-block__label {
     display: block;
     margin-bottom: 25px;
+    margin-left: 20px;
 }
 
-.upload-block__label:last-child {
-    margin-bottom: 0;
-}
+
 
 .label__title {
     display: block;
@@ -53,6 +66,10 @@
     border-top-right-radius:0;
     border-bottom-right-radius:0;
     border-right: 0px none;
+}
+
+.file__name_upload{
+    @extend .file__name;
 }
 
 .file__button {

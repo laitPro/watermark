@@ -1,17 +1,20 @@
+
 'use strict';
 
 $(function() {
 
-    var inputNumberModule = require('./modules/input-number'),
+    var blocked = require('./modules/block'),
+        inputNumberModule = require('./modules/input-number'),
         sliderOpacitySlider = require('./modules/slider-opacity'),
         positionModule = require('./modules/position'),
         imgupload = require('./modules/file-upload'),
-        ajax = require('./modules/ajax_sent.js'),
+        ajax = require('./modules/ajax_sent'),
 
         appModule = require('./modules/app'),
-        chagneLanguage = require('./modules/language-selection');
+        chagneLanguage = require('./modules/language-selection'),
+        socialSharing = require('./modules/sharing');
 
-
+    blocked.init();
     positionModule.init();
     inputNumberModule.init();
     sliderOpacitySlider.init();
@@ -20,5 +23,8 @@ $(function() {
 
     appModule.init();
     chagneLanguage.init();
-});
+    socialSharing.init();
 
+    
+     
+});

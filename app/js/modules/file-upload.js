@@ -1,4 +1,5 @@
 var $input_imgs = $('input[type=file]');
+var $input_imgs_text = $('.file__name');
 var isImgs = {};
 
 var _setupUpload = function() {
@@ -28,12 +29,20 @@ var _setupUpload = function() {
             ) {
                 input_title.text(file_name);
                 isImgs[file_id] = 'true';
+                input_title.removeClass('file__name');
+                input_title.addClass('file__name_upload');
             
                 input.trigger('imgLoaded');
             
-        } else if (isImgs[file_id] === 'false') {
-            
-            input_title.text("Вы ввели не изображение!!!!");
+        } else {
+           if (isImgs[file_id] === 'false') {
+                if ($('body').attr('lang') === 'ru'){
+                    input_title.text("Файл не выбран");
+                }
+                else{
+                    input_title.text("File is not selected");
+                }    
+            } 
         }
     }
 }  
@@ -68,6 +77,28 @@ var drawImage = function ($input, $where, id, className, callback) {
     
 }
 
+var deleteImgs = function($where){
+
+    $where.find('img').remove();
+
+};
+
+var reset = function() {
+
+    $input_imgs.each(function(index, el) {
+        isImgs[$(el).attr('id')] = 'false';
+    });
+
+    $input_imgs_text.each(function(index, el) {
+
+        if ($('body').attr('lang') === 'ru'){
+            $(el).text("Файл не выбран");
+        }
+        else
+            $(el).text("File is not selected");
+    });
+}
+
 // Функция валидации инпутов
 var validate = function(){
     for (prop in isImgs){
@@ -84,6 +115,8 @@ module.exports = {
         }
     },
     isvalidinput : validate,
-    drawImage : drawImage
+    drawImage : drawImage,
+    reset : reset,
+    deleteimgs : deleteImgs
      
 }

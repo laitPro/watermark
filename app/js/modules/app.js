@@ -1,7 +1,8 @@
 var positionModule = require('./position'),
     inputNumberModule = require('./input-number'),
     imgLoaderModule = require('./file-upload'),
-    ajaxSentModule = require('./ajax_sent.js');
+    ajaxSentModule = require('./ajax_sent.js'),
+    reset = require('./reset');
 
 var $canvas = $('.canvas'),
     $imgWrapper = $('.canvas__inner'),
@@ -20,6 +21,10 @@ var $canvas = $('.canvas'),
     $url = '../php/some_php.php',
     imgChanged = false;
 
+var _getDataAboutMode = function(){
+    $watermarkPosition.trigger('positionModeChange');
+};
+
 var getDataAboutImg = function(id) {
     var $img = $('#'+id);
 
@@ -28,10 +33,34 @@ var getDataAboutImg = function(id) {
 
 };
 
-var _sentForm = function(){
-    ajaxSentModule.init($form,$url,$data);
+var _resetForm = function (){
+
+    $form.on('main-formReset', function(){
+        imgLoaderModule.reset();
+        $data = {};
+        imgLoaderModule.deleteimgs($imgWrapper);
+        $('.section-block').block(); 
+    });
+
 };
-    
+
+var _sentForm = function(){
+    $form.on('submit', function(event) {
+        event.preventDefault();
+        ajaxSentModule.init($form,$url,$data);
+    });
+
+
+    $form.on('formSend', function(e, data) {
+        e.preventDefault();
+        console.log("form-send",data);
+    });
+
+    $form.on('formSendError', function(e,data) {
+        e.preventDefault();       
+        console.log("form-send-error");
+    });
+};
 
 // Эта функция проверяет размеры новых загруженных изображений и устанавливает новые ограничения для перемещения 
 // водного знака, в соотвествии с этими вычислениями
@@ -72,6 +101,8 @@ var _uploadBigImg = function() {
             getDataAboutImg('big-img');
             setTimeout(_loadImg, 10); // костыль для IE, без этого он берет размеры старого изображения
         });
+        
+        $('.section-block_wat').unblock();
         
     });
     
@@ -125,6 +156,8 @@ var _uploadWatermark = function() {
 
             getDataAboutImg('watermark');
         });
+        
+        $('.section-block_main').unblock();
         
     });
     
@@ -302,3 +335,4 @@ module.exports = {
         _onModeChange();
     }
 }
+

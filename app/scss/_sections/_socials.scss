@@ -75,6 +75,7 @@
 .social__link_fb {
     display: block;
     @include sprite($fb);
+    cursor: pointer;
 
     &:hover {
         @include sprite($fb-hover);
@@ -85,6 +86,7 @@
 .social__link_like {
     display: block;
     @include sprite($like);
+    cursor: pointer;
 
     &:hover {
         @include sprite($like-hover);
@@ -94,6 +96,7 @@
 .social__link_twt {
     display: block;
     @include sprite($twt);
+    cursor: pointer;
     
     &:hover {
         @include sprite($twt-hover);
@@ -103,6 +106,7 @@
 .social__link_vk {
     display: block;
     @include sprite($vk);
+    cursor: pointer;
 
     &:hover {
         @include sprite($vk-hover);
