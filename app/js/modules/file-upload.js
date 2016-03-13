@@ -91,6 +91,8 @@ var reset = function() {
 
     $input_imgs_text.each(function(index, el) {
 
+        $(this).removeClass('file__name_upload');
+
         if ($('body').attr('lang') === 'ru'){
             $(el).text("Файл не выбран");
         }
