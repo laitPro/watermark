@@ -83,7 +83,7 @@ var deleteImgs = function($where){
 
 };
 
-var reset($inputs) = function() {
+var reset = function($inputs) {
 
     $inputs.each(function() {
         
