@@ -1,5 +1,5 @@
 var $input_imgs = $('input[type=file]');
-var $input_imgs_text = $('.file__name');
+var $input_imgs_text = $('.fn');
 var isImgs = {};
 
 var _setupUpload = function() {
@@ -83,21 +83,25 @@ var deleteImgs = function($where){
 
 };
 
-var reset = function() {
+var reset($inputs) = function() {
 
-    $input_imgs.each(function(index, el) {
+    $inputs.each(function() {
+        
+        var $this = $(this),
+            $text = $this.find('.file__name_upload');
+        
         isImgs[$(el).attr('id')] = 'false';
-    });
-
-    $input_imgs_text.each(function(index, el) {
-
+        
+        $text.toggleClass('file__name_upload file__name');
+        
         if ($('body').attr('lang') === 'ru'){
             $(el).text("Файл не выбран");
         }
         else
             $(el).text("File is not selected");
     });
-}
+
+};
 
 // Функция валидации инпутов
 var validate = function(){

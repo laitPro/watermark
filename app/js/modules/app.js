@@ -40,6 +40,7 @@ var _resetForm = function (){
         $data = {};
         imgLoaderModule.deleteimgs($imgWrapper);
         $('.section-block').block(); 
+        console.log($data);
     });
 
 };
@@ -67,6 +68,8 @@ var _sentForm = function(){
 var _loadImg = function() {
     
     if ($watermarkPosition.attr('data-mode') === 'single') {
+
+        $data['mode'] = 'single';
         
         var newMaxX = $watermark.length ? $mainImg.width() - $watermark.width() : $mainImg.width(),
             newMaxY = $watermark.length ? $mainImg.height() - $watermark.height() : $mainImg.height();
@@ -87,7 +90,11 @@ var _loadImg = function() {
     } else if ($watermarkPosition.attr('data-mode') === 'tiling') {
         
         _updateTiling(true);
+
+        $data['mode'] = 'tiling';
     }
+
+    console.log($data);
     
 };
 
@@ -333,6 +340,7 @@ module.exports = {
         _changeWatermarkOpacity();
         _sentForm();
         _onModeChange();
+        _resetForm();
     }
 }
 

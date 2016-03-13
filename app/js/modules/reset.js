@@ -13,7 +13,7 @@ var reset = function (){
 var _onResetForm = function(){
 
 	if ( $(this).hasClass('main__container-aside-shell-form') ) {
-		$(this).trigger('main-formReset');
+		$(this).trigger('main-formReset');		
 	};
 }
 

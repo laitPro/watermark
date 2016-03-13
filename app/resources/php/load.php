@@ -1,13 +1,12 @@
 <?php
 
-
 // Config variables
 $path = $_SERVER["DOCUMENT_ROOT"]; // base path
-$uploads = '/watermark/dist/php/files/'; // udloads dir
+$uploads = '/php/files/'; // udloads dir
 $max_size = 2500000; // max size of upload file in bits
 
 if (!file_exists('files')) {
-		mkdir('files',777);
+		mkdir('files',0777);
 }
 
 $files = $_FILES;

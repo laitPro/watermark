@@ -68,7 +68,7 @@
     border-right: 0px none;
 }
 
-.file__name_upload{
+.file__name_upload,.fn{
     @extend .file__name;
 }
 
