@@ -21,9 +21,6 @@ var $canvas = $('.canvas'),
     $url = './php/load.php',
     imgChanged = false;
 
-var _getDataAboutMode = function(){
-    $watermarkPosition.trigger('positionModeChange');
-};
 
 var getDataAboutImg = function(id) {
     var $img = $('#'+id);
@@ -36,6 +33,14 @@ var getDataAboutImg = function(id) {
 var _sentForm = function(){
     $form.on('submit', function(event) {
         event.preventDefault();
+
+        if ($data['mode'] === 'tiling'){
+            var pos_tilling = $('.canvas__tiling').offset();
+            var pos_canvas_inner = $('.canvas__inner').offset();
+            $data['offset-x'] = pos_tilling.left -  pos_canvas_inner.left;
+            $data['offset-y'] = pos_tilling.top - pos_canvas_inner.top;
+        }
+
         ajaxSentModule.init($form,$url,$data);
     });
 
