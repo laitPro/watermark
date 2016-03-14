@@ -67,7 +67,7 @@ var switchLang = function () {
     //var cookieLang = cookieInit.setCookie('lang', 'ru');
 
 
-    $.getJSON('app/resources/data/language-switch.json', function (data) {
+    $.getJSON('data/language-switch.json', function (data) {
 
     $('.lang__link').on('click', _setLang);
         function _setLang (e) {
